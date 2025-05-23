@@ -54,7 +54,7 @@ const NavBar = () => {
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
             <NavLink to="/" className="flex items-center gap-2">
-              <img src="/lovable-uploads/a6e4ee57-a5ff-483a-b6e1-71809843ead5.png" alt="RD Logo" className="h-9 w-9" />
+              <img src="/lovable-uploads/a6e4ee57-a5ff-483a-b6e1-71809843ead5.png" alt="RD Logo" className="h-20 w-20" />
               <span className="font-semibold text-lg tracking-tight">Roman Divković</span>
             </NavLink>
           </div>

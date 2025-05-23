@@ -53,7 +53,7 @@ const skills = [
   },
   {
     category: "Tools & Methods",
-    technologies: ["Xcode", "Android Studio", "Git", "Objective-C", "Database Functionality"]
+    technologies: ["Xcode", "Android Studio", "Git", "Objective-C", "Database Functionality, AWS, CI/CD & Docker"]
   }
 ];
 
