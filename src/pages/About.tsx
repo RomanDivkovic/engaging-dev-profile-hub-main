@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import Section from "@/components/Section";
 import Timeline from "@/components/Timeline";
@@ -174,9 +173,19 @@ const About = () => {
           <h2 className="text-3xl font-bold mb-6">Want to learn more?</h2>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button asChild>
-              <Link to="/projects">
-                View My Projects
-              </Link>
+              <a href="https://betbuddys.app" target="_blank" rel="noopener noreferrer">
+                BetBuddy
+              </a>
+            </Button>
+            <Button asChild>
+              <a href="https://bookingsystems.vercel.app" target="_blank" rel="noopener noreferrer">
+                Calender
+              </a>
+            </Button>
+            <Button asChild>
+              <a href="https://capio.se/" target="_blank" rel="noopener noreferrer">
+                Capio
+              </a>
             </Button>
             <Button variant="outline" asChild>
               <a href="/files/cv.pdf" target="_blank" rel="noopener noreferrer">
