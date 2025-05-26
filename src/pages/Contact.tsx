@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -17,6 +16,7 @@ import {
 import { toast } from "@/hooks/use-toast";
 import { Github, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 import Section from "@/components/Section";
+import emailjs from "emailjs-com";
 
 // Define the form schema
 const formSchema = z.object({
@@ -50,24 +50,40 @@ const Contact = () => {
     },
   });
 
-  // Handle form submission
+  // Hantera formulärskick med EmailJS
   const onSubmit = async (data: FormValues) => {
     setIsSubmitting(true);
-    
-    // Simulate API call with a delay
-    setTimeout(() => {
-      console.log("Form data:", data);
-      
-      // Show success notification
+
+    // Använd rätt EmailJS-uppgifter
+    const SERVICE_ID = "service_jlyo4k6";
+    const TEMPLATE_ID = "template_e1jgbqq";
+    const USER_ID = "uQw8kQ6w9nQn9nQn"; // Om du behöver user/public key, annars kan du ta bort detta
+
+    try {
+      await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        {
+          name: data.name,
+          message: data.message,
+          title: "Contact Form",
+          email: data.email,
+        }
+        // , USER_ID // Om din EmailJS setup kräver user/public key, avkommentera denna rad
+      );
       toast({
         title: "Message sent successfully!",
         description: "Thank you for reaching out. I'll get back to you soon.",
       });
-      
-      // Reset form
       form.reset();
-      setIsSubmitting(false);
-    }, 1500);
+    } catch (error) {
+      toast({
+        title: "Something went wrong!",
+        description: "Could not send your message. Please try again later.",
+        variant: "destructive",
+      });
+    }
+    setIsSubmitting(false);
   };
 
   return (
