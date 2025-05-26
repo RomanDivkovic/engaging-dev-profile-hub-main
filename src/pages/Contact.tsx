@@ -16,7 +16,7 @@ import {
 import { toast } from "@/hooks/use-toast";
 import { Github, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 import Section from "@/components/Section";
-import emailjs from "emailjs-com";
+import emailjs from "@emailjs/browser";
 
 // Define the form schema
 const formSchema = z.object({
@@ -33,11 +33,16 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>;
 
+const SERVICE_ID = "service_jlyo4k6";
+const TEMPLATE_ID = "template_e1jgbqq";
+const PUBLIC_KEY = "i-VaJs5Mg6G1v2_La";
+
 const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  
+
   useEffect(() => {
     window.scrollTo(0, 0);
+    // Ingen init behövs för @emailjs/browser om du skickar publicKey i send
   }, []);
 
   // Initialize form
@@ -54,11 +59,6 @@ const Contact = () => {
   const onSubmit = async (data: FormValues) => {
     setIsSubmitting(true);
 
-    // Använd rätt EmailJS-uppgifter
-    const SERVICE_ID = "service_jlyo4k6";
-    const TEMPLATE_ID = "template_e1jgbqq";
-    const USER_ID = "uQw8kQ6w9nQn9nQn"; // Om du behöver user/public key, annars kan du ta bort detta
-
     try {
       await emailjs.send(
         SERVICE_ID,
@@ -68,8 +68,8 @@ const Contact = () => {
           message: data.message,
           title: "Contact Form",
           email: data.email,
-        }
-        // , USER_ID // Om din EmailJS setup kräver user/public key, avkommentera denna rad
+        },
+        PUBLIC_KEY // Skicka publicKey som fjärde argument
       );
       toast({
         title: "Message sent successfully!",
@@ -77,6 +77,7 @@ const Contact = () => {
       });
       form.reset();
     } catch (error) {
+      console.error(error); // Lägg till för felsökning
       toast({
         title: "Something went wrong!",
         description: "Could not send your message. Please try again later.",

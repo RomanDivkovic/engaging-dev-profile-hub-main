@@ -18,7 +18,7 @@ export const projects: Project[] = [
     title: "BetBuddys",
     description: "A webapp for creating groups and betting with friends on UFC/PPV events, featuring a comprehensive point system and league tables.",
     role: "As the fullstack developer, I designed the entire architecture, implemented the React-based frontend and built the backend logic for real-time updates and score calculations.",
-    technologies: ["React", "Firebase", "Tailwind CSS", "Node.js"],
+    technologies: ["React", "Firebase", "Tailwind CSS", "Firebase Functions", "TypeScript"],
     features: [
       "Group creation and management for betting leagues",
       "Points system for accurate predictions",
@@ -27,8 +27,8 @@ export const projects: Project[] = [
       "Annual rankings for participants"
     ],
     image: "https://images.unsplash.com/photo-1558008258-3256797b43f3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1452&q=80",
-    demoUrl: "https://example.com/betbuddys",
-    githubUrl: "https://github.com/example/betbuddys",
+    demoUrl: "https://betbuddys.app/",
+    githubUrl: "https://github.com/RomanDivkovic/buddy-bets-battle-main",
     featured: true
   },
   {
@@ -36,7 +36,7 @@ export const projects: Project[] = [
     title: "Capio Online",
     description: "A health platform allowing users to connect with healthcare providers digitally, integrating booking systems, messaging, and patient profiles.",
     role: "I focused on frontend development, building React Native components and implementing user flows that make complex healthcare interactions intuitive and accessible.",
-    technologies: ["React Native", "TypeScript", "Redux", "Express.js"],
+    technologies: ["React Native", "TypeScript", "Redux", ".NET", "C#"],
     features: [
       "Digital healthcare booking system",
       "Secure patient-provider messaging",
@@ -45,7 +45,7 @@ export const projects: Project[] = [
       "Health record accessibility"
     ],
     image: "https://images.unsplash.com/photo-1551076805-e1869033e561?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80",
-    demoUrl: "https://example.com/capioonline",
+    demoUrl: "https://www.capio.se/",
     featured: true
   },
   {
@@ -79,6 +79,6 @@ export const projects: Project[] = [
       "Project showcase with filtering"
     ],
     image: "https://images.unsplash.com/photo-1545665277-5937489579f2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-    githubUrl: "https://github.com/example/portfolio"
+    githubUrl: "https://github.com/RomanDivkovic/engaging-dev-profile-hub-main"
   }
 ];
