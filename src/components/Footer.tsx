@@ -1,4 +1,3 @@
-
 import { Github, Linkedin, Mail, FileText } from "lucide-react";
 
 const Footer = () => {
@@ -46,7 +45,7 @@ const Footer = () => {
                 <Mail className="h-5 w-5" />
               </a>
               <a 
-                href="/pdf/cv.pdf" 
+                href="/files/cv.pdf" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-foreground hover:text-secondary transition-colors"
