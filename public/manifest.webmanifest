@@ -3,12 +3,12 @@
   "short_name": "Roman",
   "icons": [
     {
-      "src": "/icon.png",
+      "src": "/uploads/a6e4ee57-a5ff-483a-b6e1-71809843ead5.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/icon.png",
+      "src": "/uploads/a6e4ee57-a5ff-483a-b6e1-71809843ead5.png",
       "sizes": "512x512",
       "type": "image/png"
     }

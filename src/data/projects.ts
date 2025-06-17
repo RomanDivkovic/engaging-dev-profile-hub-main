@@ -1,4 +1,3 @@
-
 export interface Project {
   id: string;
   title: string;
@@ -26,7 +25,7 @@ export const projects: Project[] = [
       "Result calculation with fight outcomes",
       "Annual rankings for participants"
     ],
-    image: "https://images.unsplash.com/photo-1558008258-3256797b43f3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1452&q=80",
+    image: "/betbuddys.png",
     demoUrl: "https://betbuddys.app/",
     githubUrl: "https://github.com/RomanDivkovic/buddy-bets-battle-main",
     featured: true
@@ -44,16 +43,16 @@ export const projects: Project[] = [
       "Appointment management",
       "Health record accessibility"
     ],
-    image: "https://images.unsplash.com/photo-1551076805-e1869033e561?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80",
+    image: "/lovable-uploads/07d45f1f-1633-4df8-92fa-a6306a59bbb5.png",
     demoUrl: "https://www.capio.se/",
     featured: true
   },
   {
-    id: "booking-system",
+    id: "calender-system",
     title: "Booking Calendar System",
-    description: "A comprehensive booking calendar application that allows users to schedule appointments, manage availability, and handle reservations with an intuitive interface.",
+    description: "(First version) A comprehensive booking calendar application that allows users to schedule appointments, manage availability, and handle reservations with an intuitive interface under the same household. To use in our shared washroom and avoid conflicts.",
     role: "I developed the entire application from scratch, implementing the calendar functionality, booking logic, and user interface using modern React patterns and responsive design.",
-    technologies: ["React", "TypeScript", "Tailwind CSS", "Vite"],
+    technologies: ["React", "TypeScript", "Tailwind CSS", "Vite", "Firebase"],
     features: [
       "Interactive calendar interface",
       "Appointment scheduling and management",
@@ -61,7 +60,7 @@ export const projects: Project[] = [
       "Responsive design for all devices",
       "Real-time booking updates"
     ],
-    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    image: "/bookingsystem.png",
     demoUrl: "https://bookingsystems.vercel.app/",
     githubUrl: "https://github.com/RomanDivkovic/booking-calender"
   },
@@ -70,7 +69,7 @@ export const projects: Project[] = [
     title: "Developer Portfolio",
     description: "A personal portfolio website showcasing projects and skills, built with React and Tailwind CSS.",
     role: "I designed and implemented the entire website, focusing on responsive design, animations, and accessibility.",
-    technologies: ["React", "TypeScript", "Tailwind CSS", "Vite"],
+    technologies: ["React", "TypeScript", "Tailwind CSS", "Vite", "Firebase"],
     features: [
       "Responsive design for all device sizes",
       "Custom animations and transitions",
@@ -78,7 +77,7 @@ export const projects: Project[] = [
       "Contact form with email integration",
       "Project showcase with filtering"
     ],
-    image: "https://images.unsplash.com/photo-1545665277-5937489579f2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    image: "/roman.png",
     githubUrl: "https://github.com/RomanDivkovic/engaging-dev-profile-hub-main"
   }
 ];
