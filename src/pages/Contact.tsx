@@ -17,6 +17,7 @@ import { toast } from "@/hooks/use-toast";
 import { Github, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 import Section from "@/components/Section";
 import emailjs from "@emailjs/browser";
+import { SERVICE_ID, TEMPLATE_ID, PUBLIC_KEY } from "../emailjs.config";
 
 // Define the form schema
 const formSchema = z.object({
@@ -32,10 +33,6 @@ const formSchema = z.object({
 });
 
 type FormValues = z.infer<typeof formSchema>;
-
-const SERVICE_ID = "service_jlyo4k6";
-const TEMPLATE_ID = "template_e1jgbqq";
-const PUBLIC_KEY = "i-VaJs5Mg6G1v2_La";
 
 const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -69,7 +66,7 @@ const Contact = () => {
           title: "Contact Form",
           email: data.email,
         },
-        PUBLIC_KEY // Skicka publicKey som fjärde argument
+        PUBLIC_KEY 
       );
       toast({
         title: "Message sent successfully!",
@@ -77,7 +74,7 @@ const Contact = () => {
       });
       form.reset();
     } catch (error) {
-      console.error(error); // Lägg till för felsökning
+      console.error(error);
       toast({
         title: "Something went wrong!",
         description: "Could not send your message. Please try again later.",
