@@ -66,7 +66,7 @@ const Contact = () => {
           title: "Contact Form",
           email: data.email,
         },
-        PUBLIC_KEY 
+        PUBLIC_KEY
       );
       toast({
         title: "Message sent successfully!",
@@ -94,16 +94,20 @@ const Contact = () => {
               <span className="gold-gradient-text">Touch</span>
             </h1>
             <p className="text-lg text-muted-foreground mb-12 max-w-2xl reveal-animation">
-              I'm always interested in new opportunities, collaborations, or just a friendly chat about technology and development.
+              I'm always interested in new opportunities, collaborations, or
+              just a friendly chat about technology and development.
             </p>
-            
+
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               {/* Contact Form */}
               <div className="bg-card shadow-sm rounded-lg p-6 md:p-8 animate-fade-in">
                 <h2 className="text-2xl font-bold mb-6">Send me a message</h2>
-                
+
                 <Form {...form}>
-                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                  <form
+                    onSubmit={form.handleSubmit(onSubmit)}
+                    className="space-y-6"
+                  >
                     <FormField
                       control={form.control}
                       name="name"
@@ -117,7 +121,7 @@ const Contact = () => {
                         </FormItem>
                       )}
                     />
-                    
+
                     <FormField
                       control={form.control}
                       name="email"
@@ -125,13 +129,16 @@ const Contact = () => {
                         <FormItem>
                           <FormLabel>Email</FormLabel>
                           <FormControl>
-                            <Input placeholder="your.email@example.com" {...field} />
+                            <Input
+                              placeholder="your.email@example.com"
+                              {...field}
+                            />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
                       )}
                     />
-                    
+
                     <FormField
                       control={form.control}
                       name="message"
@@ -149,9 +156,9 @@ const Contact = () => {
                         </FormItem>
                       )}
                     />
-                    
-                    <Button 
-                      type="submit" 
+
+                    <Button
+                      type="submit"
                       className="w-full"
                       disabled={isSubmitting}
                     >
@@ -160,11 +167,11 @@ const Contact = () => {
                   </form>
                 </Form>
               </div>
-              
+
               {/* Contact Info */}
               <div className="space-y-8 animate-slide-in-right">
                 <h2 className="text-2xl font-bold mb-6">Contact Information</h2>
-                
+
                 <div className="space-y-6">
                   <div className="flex items-start">
                     <div className="bg-muted rounded-full p-3 mr-4">
@@ -172,41 +179,43 @@ const Contact = () => {
                     </div>
                     <div>
                       <h3 className="font-medium mb-1">Email</h3>
-                      <a 
-                        href="mailto:romandivkovic@outlook.com" 
+                      <a
+                        href="mailto:romandivkovic@outlook.com"
                         className="text-muted-foreground hover:text-secondary transition-colors"
                       >
                         romandivkovic@outlook.com
                       </a>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-start">
                     <div className="bg-muted rounded-full p-3 mr-4">
                       <Phone className="h-5 w-5 text-secondary" />
                     </div>
                     <div>
                       <h3 className="font-medium mb-1">Phone</h3>
-                      <a 
-                        href="tel:+46721754173" 
+                      <a
+                        href="tel:+46721754173"
                         className="text-muted-foreground hover:text-secondary transition-colors"
                       >
                         +46 72 175 41 73
                       </a>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-start">
                     <div className="bg-muted rounded-full p-3 mr-4">
                       <MapPin className="h-5 w-5 text-secondary" />
                     </div>
                     <div>
                       <h3 className="font-medium mb-1">Location</h3>
-                      <p className="text-muted-foreground">Gothenburg, Sweden</p>
+                      <p className="text-muted-foreground">
+                        Gothenburg, Sweden
+                      </p>
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="pt-8 border-t border-muted">
                   <h3 className="font-medium mb-4">Connect with me</h3>
                   <div className="flex space-x-4">
