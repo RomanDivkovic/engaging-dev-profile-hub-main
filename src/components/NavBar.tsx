@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { ThemeToggle } from "./ThemeToggle";
@@ -41,6 +40,9 @@ const NavBar = () => {
       isActive ? "text-secondary font-medium after:scale-x-100" : "text-foreground"
     );
 
+  // Helper to check if current route is profile (about)
+  const isProfile = location.pathname === '/about';
+
   return (
     <nav
       className={cn(
@@ -54,8 +56,8 @@ const NavBar = () => {
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
             <NavLink to="/" className="flex items-center gap-2">
-              <img src="/lovable-uploads/a6e4ee57-a5ff-483a-b6e1-71809843ead5.png" alt="RD Logo" className="h-20 w-20" />
-              <span className="font-semibold text-lg tracking-tight">Roman Divković</span>
+              <img src="/uploads/a6e4ee57-a5ff-483a-b6e1-71809843ead5.png" alt="RD Logo" className="h-20 w-20" />
+              <span className={cn("font-semibold text-lg tracking-tight transition-colors", isProfile && "text-secondary underline underline-offset-4")}>Roman Divković</span>
             </NavLink>
           </div>
 
@@ -67,10 +69,10 @@ const NavBar = () => {
             <NavLink to="/contact" className={getNavLinkClass}>Contact</NavLink>
             
             <div className="flex items-center space-x-4 ml-4 border-l pl-4 border-muted">
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <a href="https://github.com/RomanDivkovic" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                 <Github className="h-5 w-5 hover:text-secondary transition-colors" />
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <a href="https://www.linkedin.com/in/roman-divkovic-65699a19b/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                 <Linkedin className="h-5 w-5 hover:text-secondary transition-colors" />
               </a>
               <ThemeToggle />
@@ -143,10 +145,10 @@ const NavBar = () => {
           
           <div className="border-t border-muted pt-8 mt-auto">
             <div className="flex space-x-6">
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <a href="https://github.com/RomanDivkovic" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                 <Github className="h-6 w-6 hover:text-secondary transition-colors" />
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <a href="https://www.linkedin.com/in/roman-divkovic-65699a19b/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                 <Linkedin className="h-6 w-6 hover:text-secondary transition-colors" />
               </a>
               <a href="/pdf/cv.pdf" target="_blank" rel="noopener noreferrer" aria-label="CV">

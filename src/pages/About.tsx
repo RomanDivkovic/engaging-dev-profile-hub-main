@@ -76,7 +76,7 @@ const About = () => {
             <div className="flex flex-col md:flex-row items-center gap-8 mb-8">
               <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden shadow-lg reveal-animation">
                 <img 
-                  src="/lovable-uploads/07d45f1f-1633-4df8-92fa-a6306a59bbb5.png" 
+                  src="/uploads/07d45f1f-1633-4df8-92fa-a6306a59bbb5.png" 
                   alt="Roman Divković" 
                   className="w-full h-full object-cover"
                 />

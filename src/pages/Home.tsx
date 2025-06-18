@@ -51,7 +51,7 @@ const Home = () => {
           )}>
             <div className="mb-8">
               <img 
-                src="/lovable-uploads/a6e4ee57-a5ff-483a-b6e1-71809843ead5.png" 
+                src="/uploads/a6e4ee57-a5ff-483a-b6e1-71809843ead5.png" 
                 alt="Roman Divković Logo" 
                 className="mx-auto w-60 h-60 mb-6"
               />
