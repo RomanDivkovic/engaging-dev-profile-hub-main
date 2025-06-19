@@ -1,24 +1,19 @@
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Eye, Github } from "lucide-react";
-import TechStack from "./TechStack";
-import { cn } from "@/lib/utils";
+import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Eye, Github } from 'lucide-react'
+import TechStack from './TechStack'
+import { cn } from '@/lib/utils'
 
 interface ProjectCardProps {
-  title: string;
-  description: string;
-  technologies: string[];
-  image: string;
-  demoUrl?: string;
-  githubUrl?: string;
-  className?: string;
-  featured?: boolean;
-  onClick?: () => void;
+  title: string
+  description: string
+  technologies: string[]
+  image: string
+  demoUrl?: string
+  githubUrl?: string
+  className?: string
+  featured?: boolean
+  onClick?: () => void
 }
 
 const ProjectCard = ({
@@ -35,8 +30,8 @@ const ProjectCard = ({
   return (
     <Card
       className={cn(
-        "overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 hover:scale-[1.03] cursor-pointer group",
-        featured && "border-secondary/50",
+        'overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 hover:scale-[1.03] cursor-pointer group',
+        featured && 'border-secondary/50',
         className
       )}
       onClick={onClick}
@@ -93,7 +88,7 @@ const ProjectCard = ({
         )}
       </CardFooter>
     </Card>
-  );
-};
+  )
+}
 
-export default ProjectCard;
+export default ProjectCard

@@ -1,33 +1,32 @@
-
-import { Moon, Sun } from "lucide-react";
-import { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
+import { Moon, Sun } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { Button } from '@/components/ui/button'
 
 export function ThemeToggle() {
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [theme, setTheme] = useState<'light' | 'dark'>('light')
 
   useEffect(() => {
-    const storedTheme = localStorage.getItem("theme");
-    if (storedTheme === "dark") {
-      setTheme("dark");
-      document.documentElement.classList.add("dark");
+    const storedTheme = localStorage.getItem('theme')
+    if (storedTheme === 'dark') {
+      setTheme('dark')
+      document.documentElement.classList.add('dark')
     } else {
-      setTheme("light");
-      document.documentElement.classList.remove("dark");
+      setTheme('light')
+      document.documentElement.classList.remove('dark')
     }
-  }, []);
+  }, [])
 
   const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
-    
-    if (newTheme === "dark") {
-      document.documentElement.classList.add("dark");
+    const newTheme = theme === 'light' ? 'dark' : 'light'
+    setTheme(newTheme)
+    localStorage.setItem('theme', newTheme)
+
+    if (newTheme === 'dark') {
+      document.documentElement.classList.add('dark')
     } else {
-      document.documentElement.classList.remove("dark");
+      document.documentElement.classList.remove('dark')
     }
-  };
+  }
 
   return (
     <Button
@@ -37,11 +36,11 @@ export function ThemeToggle() {
       className="rounded-full"
       aria-label="Toggle theme"
     >
-      {theme === "dark" ? (
+      {theme === 'dark' ? (
         <Moon className="h-[1.2rem] w-[1.2rem] transition-all" />
       ) : (
         <Sun className="h-[1.2rem] w-[1.2rem] transition-all" />
       )}
     </Button>
-  );
+  )
 }

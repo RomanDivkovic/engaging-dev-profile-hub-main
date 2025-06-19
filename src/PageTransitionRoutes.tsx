@@ -1,13 +1,13 @@
-import { AnimatePresence, motion } from "framer-motion";
-import { useLocation, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Projects from "./pages/Projects";
-import Contact from "./pages/Contact";
-import NotFound from "./pages/NotFound";
+import { AnimatePresence, motion } from 'framer-motion'
+import { useLocation, Routes, Route } from 'react-router-dom'
+import Home from './pages/Home'
+import About from './pages/About'
+import Projects from './pages/Projects'
+import Contact from './pages/Contact'
+import NotFound from './pages/NotFound'
 
 const PageTransitionRoutes = () => {
-  const location = useLocation();
+  const location = useLocation()
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
@@ -78,7 +78,7 @@ const PageTransitionRoutes = () => {
         />
       </Routes>
     </AnimatePresence>
-  );
-};
+  )
+}
 
-export default PageTransitionRoutes;
+export default PageTransitionRoutes

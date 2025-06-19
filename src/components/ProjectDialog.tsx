@@ -1,18 +1,17 @@
-
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Eye, Github } from "lucide-react";
-import TechStack from "./TechStack";
-import { Project } from "@/data/projects";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
+import { Button } from '@/components/ui/button'
+import { Eye, Github } from 'lucide-react'
+import TechStack from './TechStack'
+import { Project } from '@/data/projects'
 
 interface ProjectDialogProps {
-  project: Project | null;
-  isOpen: boolean;
-  onClose: () => void;
+  project: Project | null
+  isOpen: boolean
+  onClose: () => void
 }
 
 const ProjectDialog = ({ project, isOpen, onClose }: ProjectDialogProps) => {
-  if (!project) return null;
+  if (!project) return null
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -23,11 +22,7 @@ const ProjectDialog = ({ project, isOpen, onClose }: ProjectDialogProps) => {
 
         <div className="space-y-6">
           <div className="aspect-video w-full overflow-hidden rounded-md">
-            <img 
-              src={project.image} 
-              alt={project.title} 
-              className="w-full h-full object-cover" 
-            />
+            <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
           </div>
 
           <div className="space-y-4">
@@ -39,9 +34,7 @@ const ProjectDialog = ({ project, isOpen, onClose }: ProjectDialogProps) => {
             <div>
               <h4 className="text-lg font-semibold mb-2">Features</h4>
               <ul className="list-disc pl-5 space-y-1 text-muted-foreground">
-                {project.features?.map((feature, index) => (
-                  <li key={index}>{feature}</li>
-                ))}
+                {project.features?.map((feature, index) => <li key={index}>{feature}</li>)}
               </ul>
             </div>
 
@@ -58,11 +51,7 @@ const ProjectDialog = ({ project, isOpen, onClose }: ProjectDialogProps) => {
 
           <div className="flex flex-col sm:flex-row gap-3 pt-4">
             {project.demoUrl && (
-              <Button 
-                variant="default" 
-                className="flex-1"
-                asChild
-              >
+              <Button variant="default" className="flex-1" asChild>
                 <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">
                   <Eye className="mr-2 h-4 w-4" />
                   View Live Demo
@@ -70,11 +59,7 @@ const ProjectDialog = ({ project, isOpen, onClose }: ProjectDialogProps) => {
               </Button>
             )}
             {project.githubUrl && (
-              <Button 
-                variant="outline" 
-                className="flex-1"
-                asChild
-              >
+              <Button variant="outline" className="flex-1" asChild>
                 <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
                   <Github className="mr-2 h-4 w-4" />
                   View Source Code
@@ -85,7 +70,7 @@ const ProjectDialog = ({ project, isOpen, onClose }: ProjectDialogProps) => {
         </div>
       </DialogContent>
     </Dialog>
-  );
-};
+  )
+}
 
-export default ProjectDialog;
+export default ProjectDialog

@@ -1,27 +1,27 @@
-
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils'
 
 interface TimelineItemProps {
-  year: string;
-  title: string;
-  description: string;
-  organization: string;
+  year: string
+  title: string
+  description: string
+  organization: string
 }
 
 interface TimelineProps {
-  items: TimelineItemProps[];
-  className?: string;
+  items: TimelineItemProps[]
+  className?: string
 }
 
 const Timeline = ({ items, className }: TimelineProps) => {
   return (
-    <div className={cn("space-y-12", className)}>
+    <div className={cn('space-y-12', className)}>
       {items.map((item, index) => (
-        <div 
-          key={index} 
+        <div
+          key={index}
           className={cn(
-            "relative pl-12 pb-8",
-            index !== items.length - 1 && "before:absolute before:left-5 before:top-8 before:h-[calc(100%-12px)] before:w-px before:bg-secondary/30"
+            'relative pl-12 pb-8',
+            index !== items.length - 1 &&
+              'before:absolute before:left-5 before:top-8 before:h-[calc(100%-12px)] before:w-px before:bg-secondary/30'
           )}
         >
           <div className="absolute left-0 top-1 h-10 w-10 rounded-full border border-secondary/50 bg-muted flex items-center justify-center text-secondary font-mono text-sm">
@@ -35,7 +35,7 @@ const Timeline = ({ items, className }: TimelineProps) => {
         </div>
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default Timeline;
+export default Timeline
