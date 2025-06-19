@@ -6,10 +6,27 @@ import { Toaster } from "@/components/ui/toaster";
 
 global.scrollTo = jest.fn();
 
-// Mock emailjs
+// Mock IntersectionObserver for jsdom (with correct interface and TS ignore)
+class MockIntersectionObserver {
+  constructor() {}
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+  takeRecords() {
+    return [];
+  }
+  root = null;
+  rootMargin = "";
+  thresholds = [];
+}
+window.IntersectionObserver = MockIntersectionObserver;
+global.IntersectionObserver = MockIntersectionObserver;
+
+// Mock emailjs and confetti for tests
 jest.mock("@emailjs/browser", () => ({
   send: jest.fn(() => Promise.resolve()),
 }));
+jest.mock("canvas-confetti", () => () => {});
 // Mock config import
 jest.mock("../emailjs.config", () => ({
   SERVICE_ID: "test_service",

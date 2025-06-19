@@ -1,4 +1,15 @@
 import { useState, useEffect } from "react";
+// Polyfill confetti for non-browser (test) environments
+const isTest =
+  typeof process !== "undefined" &&
+  process.env &&
+  process.env.NODE_ENV === "test";
+let confetti: (...args: unknown[]) => void = () => {};
+if (!isTest && typeof window !== "undefined") {
+  import("canvas-confetti").then((mod) => {
+    confetti = mod.default;
+  });
+}
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -36,6 +47,7 @@ type FormValues = z.infer<typeof formSchema>;
 
 const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -55,7 +67,6 @@ const Contact = () => {
   // Hantera formulärskick med EmailJS
   const onSubmit = async (data: FormValues) => {
     setIsSubmitting(true);
-
     try {
       await emailjs.send(
         SERVICE_ID,
@@ -72,6 +83,13 @@ const Contact = () => {
         title: "Message sent successfully!",
         description: "Thank you for reaching out. I'll get back to you soon.",
       });
+      confetti({
+        particleCount: 80,
+        spread: 70,
+        origin: { y: 0.6 },
+      });
+      setShowSuccess(true);
+      setTimeout(() => setShowSuccess(false), 3000);
       form.reset();
     } catch (error) {
       console.error(error);
@@ -159,11 +177,38 @@ const Contact = () => {
 
                     <Button
                       type="submit"
-                      className="w-full"
+                      className="w-full flex items-center justify-center"
                       disabled={isSubmitting}
                     >
-                      {isSubmitting ? "Sending..." : "Send Message"}
+                      {isSubmitting ? (
+                        <>
+                          <span className="mr-2">Sending</span>
+                          <span className="inline-block w-4 h-4 border-2 border-t-2 border-t-transparent border-primary rounded-full animate-spin"></span>
+                        </>
+                      ) : (
+                        "Send Message"
+                      )}
                     </Button>
+                    {showSuccess && (
+                      <div className="mt-6 flex flex-col items-center animate-fade-in">
+                        <svg
+                          className="w-16 h-16 text-green-500 mb-2"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                        <div className="text-lg font-semibold text-green-600">
+                          Message sent! Thank you 🙌
+                        </div>
+                      </div>
+                    )}
                   </form>
                 </Form>
               </div>

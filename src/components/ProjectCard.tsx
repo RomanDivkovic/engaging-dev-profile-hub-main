@@ -1,5 +1,9 @@
-
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Eye, Github } from "lucide-react";
 import TechStack from "./TechStack";
@@ -29,19 +33,19 @@ const ProjectCard = ({
   onClick,
 }: ProjectCardProps) => {
   return (
-    <Card 
+    <Card
       className={cn(
-        "overflow-hidden transition-all duration-300 hover:shadow-md hover:-translate-y-1",
+        "overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 hover:scale-[1.03] cursor-pointer group",
         featured && "border-secondary/50",
         className
       )}
       onClick={onClick}
     >
       <div className="aspect-video w-full overflow-hidden">
-        <img 
-          src={image} 
-          alt={title} 
-          className="w-full h-full object-cover transform transition-transform duration-500 hover:scale-105" 
+        <img
+          src={image}
+          alt={title}
+          className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110 group-hover:brightness-105"
         />
       </div>
       <CardHeader>
@@ -55,16 +59,14 @@ const ProjectCard = ({
         </div>
       </CardHeader>
       <CardContent>
-        <p className="text-muted-foreground mb-4 line-clamp-3">
-          {description}
-        </p>
+        <p className="text-muted-foreground mb-4 line-clamp-3">{description}</p>
         <TechStack technologies={technologies} />
       </CardContent>
       <CardFooter className="flex justify-between gap-2">
         {demoUrl && (
-          <Button 
-            variant="outline" 
-            size="sm" 
+          <Button
+            variant="outline"
+            size="sm"
             className="flex-1"
             asChild
             onClick={(e) => e.stopPropagation()}
@@ -76,9 +78,9 @@ const ProjectCard = ({
           </Button>
         )}
         {githubUrl && (
-          <Button 
-            variant="outline" 
-            size="sm" 
+          <Button
+            variant="outline"
+            size="sm"
             className="flex-1"
             asChild
             onClick={(e) => e.stopPropagation()}
