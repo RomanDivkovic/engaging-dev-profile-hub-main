@@ -1,8 +1,7 @@
-
-import Home from "./Home";
+import Home from './Home'
 
 const Index = () => {
-  return <Home />;
-};
+  return <Home />
+}
 
-export default Index;
+export default Index

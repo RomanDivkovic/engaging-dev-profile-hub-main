@@ -1,7 +1,7 @@
-import { Github, Linkedin, Mail, FileText } from "lucide-react";
+import { Github, Linkedin, Mail, FileText } from 'lucide-react'
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear();
+  const currentYear = new Date().getFullYear()
 
   return (
     <footer className="bg-muted/60 dark:bg-muted/20 py-12">
@@ -17,9 +17,8 @@ const Footer = () => {
               <span className="font-semibold text-lg">Roman Divković</span>
             </div>
             <p className="text-muted-foreground text-sm max-w-md text-center md:text-left">
-              Fullstack developer specializing in React, React Native, and
-              Firebase solutions. Building user-centered applications with
-              modern technology.
+              Fullstack developer specializing in React, React Native, and Firebase solutions.
+              Building user-centered applications with modern technology.
             </p>
           </div>
 
@@ -67,7 +66,7 @@ const Footer = () => {
         </div>
       </div>
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

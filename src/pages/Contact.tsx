@@ -1,21 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react'
 // Polyfill confetti for non-browser (test) environments
-const isTest =
-  typeof process !== "undefined" &&
-  process.env &&
-  process.env.NODE_ENV === "test";
-let confetti: (...args: unknown[]) => void = () => {};
-if (!isTest && typeof window !== "undefined") {
-  import("canvas-confetti").then((mod) => {
-    confetti = mod.default;
-  });
+const isTest = typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 'test'
+let confetti: (...args: unknown[]) => void = () => {}
+if (!isTest && typeof window !== 'undefined') {
+  import('canvas-confetti').then((mod) => {
+    confetti = mod.default
+  })
 }
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as z from 'zod'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
 import {
   Form,
   FormControl,
@@ -23,50 +20,44 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { toast } from "@/hooks/use-toast";
-import { Github, Linkedin, Mail, MapPin, Phone } from "lucide-react";
-import Section from "@/components/Section";
-import emailjs from "@emailjs/browser";
-import { SERVICE_ID, TEMPLATE_ID, PUBLIC_KEY } from "../emailjs.config";
+} from '@/components/ui/form'
+import { toast } from '@/hooks/use-toast'
+import { Github, Linkedin, Mail, MapPin, Phone } from 'lucide-react'
+import Section from '@/components/Section'
+import emailjs from '@emailjs/browser'
+import { SERVICE_ID, TEMPLATE_ID, PUBLIC_KEY } from '../emailjs.config'
 
 // Define the form schema
 const formSchema = z.object({
-  name: z
-    .string()
-    .min(2, { message: "Name must be at least 2 characters." })
-    .max(100),
-  email: z.string().email({ message: "Please enter a valid email address." }),
-  message: z
-    .string()
-    .min(10, { message: "Message must be at least 10 characters." })
-    .max(1000),
-});
+  name: z.string().min(2, { message: 'Name must be at least 2 characters.' }).max(100),
+  email: z.string().email({ message: 'Please enter a valid email address.' }),
+  message: z.string().min(10, { message: 'Message must be at least 10 characters.' }).max(1000),
+})
 
-type FormValues = z.infer<typeof formSchema>;
+type FormValues = z.infer<typeof formSchema>
 
 const Contact = () => {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [showSuccess, setShowSuccess] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [showSuccess, setShowSuccess] = useState(false)
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo(0, 0)
     // Ingen init behövs för @emailjs/browser om du skickar publicKey i send
-  }, []);
+  }, [])
 
   // Initialize form
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
-      email: "",
-      message: "",
+      name: '',
+      email: '',
+      message: '',
     },
-  });
+  })
 
   // Hantera formulärskick med EmailJS
   const onSubmit = async (data: FormValues) => {
-    setIsSubmitting(true);
+    setIsSubmitting(true)
     try {
       await emailjs.send(
         SERVICE_ID,
@@ -74,33 +65,33 @@ const Contact = () => {
         {
           name: data.name,
           message: data.message,
-          title: "Contact Form",
+          title: 'Contact Form',
           email: data.email,
         },
         PUBLIC_KEY
-      );
+      )
       toast({
-        title: "Message sent successfully!",
+        title: 'Message sent successfully!',
         description: "Thank you for reaching out. I'll get back to you soon.",
-      });
+      })
       confetti({
         particleCount: 80,
         spread: 70,
         origin: { y: 0.6 },
-      });
-      setShowSuccess(true);
-      setTimeout(() => setShowSuccess(false), 3000);
-      form.reset();
+      })
+      setShowSuccess(true)
+      setTimeout(() => setShowSuccess(false), 3000)
+      form.reset()
     } catch (error) {
-      console.error(error);
+      console.error(error)
       toast({
-        title: "Something went wrong!",
-        description: "Could not send your message. Please try again later.",
-        variant: "destructive",
-      });
+        title: 'Something went wrong!',
+        description: 'Could not send your message. Please try again later.',
+        variant: 'destructive',
+      })
     }
-    setIsSubmitting(false);
-  };
+    setIsSubmitting(false)
+  }
 
   return (
     <div className="pt-16">
@@ -112,8 +103,8 @@ const Contact = () => {
               <span className="gold-gradient-text">Touch</span>
             </h1>
             <p className="text-lg text-muted-foreground mb-12 max-w-2xl reveal-animation">
-              I'm always interested in new opportunities, collaborations, or
-              just a friendly chat about technology and development.
+              I'm always interested in new opportunities, collaborations, or just a friendly chat
+              about technology and development.
             </p>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -122,10 +113,7 @@ const Contact = () => {
                 <h2 className="text-2xl font-bold mb-6">Send me a message</h2>
 
                 <Form {...form}>
-                  <form
-                    onSubmit={form.handleSubmit(onSubmit)}
-                    className="space-y-6"
-                  >
+                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                     <FormField
                       control={form.control}
                       name="name"
@@ -147,10 +135,7 @@ const Contact = () => {
                         <FormItem>
                           <FormLabel>Email</FormLabel>
                           <FormControl>
-                            <Input
-                              placeholder="your.email@example.com"
-                              {...field}
-                            />
+                            <Input placeholder="your.email@example.com" {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -186,7 +171,7 @@ const Contact = () => {
                           <span className="inline-block w-4 h-4 border-2 border-t-2 border-t-transparent border-primary rounded-full animate-spin"></span>
                         </>
                       ) : (
-                        "Send Message"
+                        'Send Message'
                       )}
                     </Button>
                     {showSuccess && (
@@ -198,11 +183,7 @@ const Contact = () => {
                           strokeWidth="2"
                           viewBox="0 0 24 24"
                         >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M5 13l4 4L19 7"
-                          />
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                         </svg>
                         <div className="text-lg font-semibold text-green-600">
                           Message sent! Thank you 🙌
@@ -254,9 +235,7 @@ const Contact = () => {
                     </div>
                     <div>
                       <h3 className="font-medium mb-1">Location</h3>
-                      <p className="text-muted-foreground">
-                        Gothenburg, Sweden
-                      </p>
+                      <p className="text-muted-foreground">Gothenburg, Sweden</p>
                     </div>
                   </div>
                 </div>
@@ -290,7 +269,7 @@ const Contact = () => {
         </div>
       </Section>
     </div>
-  );
-};
+  )
+}
 
-export default Contact;
+export default Contact
