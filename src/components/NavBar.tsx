@@ -126,6 +126,7 @@ const NavBar = () => {
 
       {/* Mobile menu */}
       <div
+        data-testid="mobile-menu"
         className={cn(
           'md:hidden bg-background/95 dark:bg-background/95 backdrop-blur-md transition-transform duration-300 ease-in-out transform',
           isOpen ? 'translate-x-0' : '-translate-x-full',
@@ -136,6 +137,7 @@ const NavBar = () => {
           <div className="space-y-6">
             <NavLink
               to="/"
+              data-testid="mobile-nav-home"
               className={({ isActive }) =>
                 cn(
                   'block text-lg font-medium py-2',
@@ -147,6 +149,7 @@ const NavBar = () => {
             </NavLink>
             <NavLink
               to="/about"
+              data-testid="mobile-nav-about"
               className={({ isActive }) =>
                 cn(
                   'block text-lg font-medium py-2',
@@ -158,6 +161,7 @@ const NavBar = () => {
             </NavLink>
             <NavLink
               to="/projects"
+              data-testid="mobile-nav-projects"
               className={({ isActive }) =>
                 cn(
                   'block text-lg font-medium py-2',
@@ -169,6 +173,7 @@ const NavBar = () => {
             </NavLink>
             <NavLink
               to="/contact"
+              data-testid="mobile-nav-contact"
               className={({ isActive }) =>
                 cn(
                   'block text-lg font-medium py-2',
