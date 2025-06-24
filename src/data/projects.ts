@@ -18,7 +18,15 @@ export const projects: Project[] = [
     description:
       'A webapp for creating groups and betting with friends on UFC/PPV events, featuring a comprehensive point system and league tables.',
     role: 'As the fullstack developer, I designed the entire architecture, implemented the React-based frontend and built the backend logic for real-time updates and score calculations.',
-    technologies: ['React', 'Firebase', 'Tailwind CSS', 'Firebase Functions', 'TypeScript'],
+    technologies: [
+      'React',
+      'Firebase',
+      'Firestore',
+      'Tailwind CSS',
+      'Firebase Functions',
+      'TypeScript',
+      'Vite',
+    ],
     features: [
       'Group creation and management for betting leagues',
       'Points system for accurate predictions',
@@ -37,7 +45,17 @@ export const projects: Project[] = [
     description:
       'A health platform allowing users to connect with healthcare providers digitally, integrating booking systems, messaging, and patient profiles.',
     role: 'I focused on frontend development, building React Native components and implementing user flows that make complex healthcare interactions intuitive and accessible.',
-    technologies: ['React Native', 'TypeScript', 'Redux', '.NET', 'C#'],
+    technologies: [
+      'React Native',
+      'React',
+      'TypeScript',
+      'Redux',
+      '.NET',
+      'C#',
+      'Azure',
+      'Figma',
+      'AWS',
+    ],
     features: [
       'Digital healthcare booking system',
       'Secure patient-provider messaging',
