@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { ArrowDown, ChevronRight, Send } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { MessageWall } from '@/components/MessageWall'
 import Section from '@/components/Section'
 import ProjectCard from '@/components/ProjectCard'
 import { Link } from 'react-router-dom'
@@ -99,6 +100,15 @@ const Home = () => {
           </div>
         </div>
       </div>
+
+      {/* Message Wall Section */}
+      <Section
+        title="Wall of Kindness"
+        subtitle="Leave a message for the community!"
+        className="bg-muted/10"
+      >
+        <MessageWall />
+      </Section>
 
       {/* Featured Projects Section */}
       <Section

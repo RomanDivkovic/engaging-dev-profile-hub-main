@@ -1,51 +1,94 @@
-# Welcome to my CV project
+# Engaging Dev Profile Hub
 
-## Project info
+A modern, interactive portfolio and CV site for Roman Divković.
 
-## How can I edit this code?
+## 🚀 About This Project
 
-**Use your preferred IDE**
+This site showcases Roman Divković's professional experience, projects, and skills in a visually engaging and interactive way. It features:
 
-If you want to work locally using your own IDE
+- A dynamic timeline of experience
+- Project portfolio with detailed dialogs
+- Contact form with email integration
+- Responsive design and dark mode
+- Animated UI and confetti effects
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## 🛠️ Technologies Used
 
-Follow these steps:
+- **Vite** (build tool)
+- **React** (UI library)
+- **TypeScript** (type safety)
+- **shadcn/ui** (component library)
+- **Tailwind CSS** (utility-first styling)
+- **Jest** & **React Testing Library** (unit tests)
+- **Husky** & **lint-staged** (pre-commit hooks)
+- **Prettier** & **ESLint** (code quality)
+- **EmailJS** (contact form email delivery)
+- **canvas-confetti** (browser confetti)
+- **CircleCI** (continuous integration)
+
+## ✨ Features & Showcases
+
+- **Animated Timeline:** See career and education highlights in a scrollable, animated timeline.
+- **Project Gallery:** Browse featured projects with images, tech stack, and links.
+- **Contact Form:** Send a message directly from the site (with email delivery and confetti on success).
+- **Responsive & Accessible:** Works great on all devices and supports keyboard navigation.
+- **Dark/Light Mode:** Toggle between themes for comfortable viewing.
+
+## 📦 Getting Started
+
+### Prerequisites
+
+- Node.js (v18+ recommended)
+- npm (v9+ recommended)
+
+### Installation
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
+# 1. Clone the repository
 git clone <YOUR_GIT_URL>
+cd engaging-dev-profile-hub-main
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# 2. Install dependencies
+npm install
 
-# Step 3: Install the necessary dependencies.
-npm i
+# 3. Create a .env file (for EmailJS)
+cp .env.example .env
+# Edit .env with your EmailJS credentials if you want to use the contact form
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# 4. Start the development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Visit [http://localhost:5173](http://localhost:5173) to view the site.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Running Tests
 
-**Use GitHub Codespaces**
+```sh
+npm test
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### Linting & Formatting
 
-## What technologies are used for this project?
+```sh
+npm run lint     # Check code style
+npm run format   # Format code with Prettier
+```
 
-This project is built with:
+### Pre-commit & CI
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- Pre-commit hooks run lint, format, and tests automatically.
+- CircleCI runs all checks on every push.
+
+## 🖼️ Screenshots
+
+![Home Page](public/betbuddys.png)
+![Project Gallery](public/bookingsystem.png)
+
+## 🙌 Credits
+
+- Built by Roman Divković
+- UI inspired by modern developer portfolios
+
+---
+
+Feel free to fork, star, and use as a template for your own portfolio!
