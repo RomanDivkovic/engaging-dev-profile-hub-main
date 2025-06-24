@@ -140,7 +140,8 @@ const NavBar = () => {
               data-testid="mobile-nav-home"
               className={({ isActive }) =>
                 cn(
-                  'block text-lg font-medium py-2',
+                  'block text-xl font-bold py-2',
+                  'text-white dark:text-foreground',
                   isActive ? 'text-secondary' : 'hover:text-secondary'
                 )
               }
@@ -152,7 +153,8 @@ const NavBar = () => {
               data-testid="mobile-nav-about"
               className={({ isActive }) =>
                 cn(
-                  'block text-lg font-medium py-2',
+                  'block text-xl font-bold py-2',
+                  'text-white dark:text-foreground',
                   isActive ? 'text-secondary' : 'hover:text-secondary'
                 )
               }
@@ -164,7 +166,8 @@ const NavBar = () => {
               data-testid="mobile-nav-projects"
               className={({ isActive }) =>
                 cn(
-                  'block text-lg font-medium py-2',
+                  'block text-xl font-bold py-2',
+                  'text-white dark:text-foreground',
                   isActive ? 'text-secondary' : 'hover:text-secondary'
                 )
               }
@@ -176,7 +179,8 @@ const NavBar = () => {
               data-testid="mobile-nav-contact"
               className={({ isActive }) =>
                 cn(
-                  'block text-lg font-medium py-2',
+                  'block text-xl font-bold py-2',
+                  'text-white dark:text-foreground',
                   isActive ? 'text-secondary' : 'hover:text-secondary'
                 )
               }
