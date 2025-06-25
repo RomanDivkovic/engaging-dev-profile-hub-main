@@ -141,7 +141,7 @@ const NavBar = () => {
               className={({ isActive }) =>
                 cn(
                   'block text-xl font-bold py-2',
-                  'text-white dark:text-foreground',
+                  'text-black dark:text-white',
                   isActive ? 'text-secondary' : 'hover:text-secondary'
                 )
               }
@@ -154,7 +154,7 @@ const NavBar = () => {
               className={({ isActive }) =>
                 cn(
                   'block text-xl font-bold py-2',
-                  'text-white dark:text-foreground',
+                  'text-black dark:text-white',
                   isActive ? 'text-secondary' : 'hover:text-secondary'
                 )
               }
@@ -167,7 +167,7 @@ const NavBar = () => {
               className={({ isActive }) =>
                 cn(
                   'block text-xl font-bold py-2',
-                  'text-white dark:text-foreground',
+                  'text-black dark:text-white',
                   isActive ? 'text-secondary' : 'hover:text-secondary'
                 )
               }
@@ -180,7 +180,7 @@ const NavBar = () => {
               className={({ isActive }) =>
                 cn(
                   'block text-xl font-bold py-2',
-                  'text-white dark:text-foreground',
+                  'text-black dark:text-white',
                   isActive ? 'text-secondary' : 'hover:text-secondary'
                 )
               }
@@ -207,7 +207,7 @@ const NavBar = () => {
               >
                 <Linkedin className="h-6 w-6 hover:text-secondary transition-colors" />
               </a>
-              <a href="/pdf/cv.pdf" target="_blank" rel="noopener noreferrer" aria-label="CV">
+              <a href="/files/cv.pdf" target="_blank" rel="noopener noreferrer" aria-label="CV">
                 <FileText className="h-6 w-6 hover:text-secondary transition-colors" />
               </a>
               <a
