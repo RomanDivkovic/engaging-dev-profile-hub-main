@@ -8,6 +8,7 @@ export interface Project {
   image: string
   demoUrl?: string
   githubUrl?: string
+  alert?: string // Added alert property
   featured?: boolean
 }
 
@@ -36,7 +37,8 @@ export const projects: Project[] = [
     ],
     image: '/betbuddys.png',
     demoUrl: 'https://betbuddys.app/',
-    githubUrl: 'https://github.com/RomanDivkovic/buddy-bets-battle-main',
+    alert:
+      'The BetBuddys repository is private. Please contact me to request access if you would like to view the code.',
     featured: true,
   },
   {
@@ -72,9 +74,9 @@ export const projects: Project[] = [
     id: 'calender-system',
     title: 'Booking Calendar System',
     description:
-      '(First version) A comprehensive booking calendar application that allows users to schedule appointments, manage availability, and handle reservations with an intuitive interface under the same household. To use in our shared washroom and avoid conflicts.',
+      '(First version) A comprehensive booking calendar application that allows users to schedule appointments, manage availability, and handle reservations with an intuitive interface under the same household (Was created for our household and to get it up and run quickly we just added that in the first release that everything went to the same db). To use in our shared washroom and avoid conflicts.',
     role: 'I developed the entire application from scratch, implementing the calendar functionality, booking logic, and user interface using modern React patterns and responsive design.',
-    technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Vite', 'Firebase'],
+    technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Vite', 'Firebase', 'Real time database'],
     features: [
       'Interactive calendar interface',
       'Appointment scheduling and management',
@@ -83,8 +85,26 @@ export const projects: Project[] = [
       'Real-time booking updates',
     ],
     image: '/bookingsystem.png',
-    demoUrl: 'https://bookingsystems.vercel.app/',
+    demoUrl: 'https://booking-client-nu.vercel.app/',
     githubUrl: 'https://github.com/RomanDivkovic/booking-calender',
+  },
+  {
+    id: 'calender-system-v2',
+    title: 'Booking Calendar System (V2)',
+    description:
+      'An improved version of the booking calendar application with enhanced features and user experience, allowing users to manage bookings more efficiently.',
+    role: 'I redesigned the application architecture, improved the user interface, and added new features based on user feedback, ensuring a seamless booking experience.',
+    technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Vite', 'Supabase', 'PostgreSQL', 'Jest'],
+    features: [
+      'Enhanced user interface with better navigation',
+      'Improved booking management features',
+      'User authentication and profile management',
+      'Real-time notifications for bookings',
+      'Advanced filtering and search options',
+    ],
+    image: '/bookingsystemv2.png',
+    demoUrl: 'https://booking-client-nu.vercel.app/',
+    githubUrl: 'https://github.com/RomanDivkovic/Booking-client',
   },
   {
     id: 'portfolio',
