@@ -8,7 +8,7 @@ export interface Project {
   image: string
   demoUrl?: string
   githubUrl?: string
-  alert?: string // Added alert property
+  alert?: string
   featured?: boolean
 }
 
