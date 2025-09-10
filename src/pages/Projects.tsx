@@ -74,6 +74,7 @@ const Projects = () => {
               technologies={project.technologies}
               demoUrl={project.demoUrl}
               githubUrl={project.githubUrl}
+              alert={project.alert}
               featured={project.featured}
               onClick={() => handleProjectClick(project)}
               className="cursor-pointer"
