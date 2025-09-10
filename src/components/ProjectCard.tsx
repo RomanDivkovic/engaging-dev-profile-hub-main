@@ -1,8 +1,9 @@
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Eye, Github } from 'lucide-react'
+import { Eye, Github, AlertTriangle } from 'lucide-react'
 import TechStack from './TechStack'
 import { cn } from '@/lib/utils'
+import { toast } from 'sonner'
 
 interface ProjectCardProps {
   title: string
@@ -11,6 +12,7 @@ interface ProjectCardProps {
   image: string
   demoUrl?: string
   githubUrl?: string
+  alert?: string
   className?: string
   featured?: boolean
   onClick?: () => void
@@ -23,10 +25,22 @@ const ProjectCard = ({
   image,
   demoUrl,
   githubUrl,
+  alert,
   className,
   featured = false,
   onClick,
 }: ProjectCardProps) => {
+  const handleInteraction = (e: React.MouseEvent, url?: string) => {
+    e.stopPropagation()
+    if (alert) {
+      toast.info(alert, {
+        action: url ? { label: 'Continue', onClick: () => window.open(url, '_blank') } : undefined,
+      })
+    } else if (url) {
+      window.open(url, '_blank', 'noopener,noreferrer')
+    }
+  }
+
   return (
     <Card
       className={cn(
@@ -36,12 +50,17 @@ const ProjectCard = ({
       )}
       onClick={onClick}
     >
-      <div className="aspect-video w-full overflow-hidden">
+      <div className="aspect-video w-full overflow-hidden relative">
         <img
           src={image}
           alt={title}
           className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110 group-hover:brightness-105"
         />
+        {alert && (
+          <div className="absolute top-2 right-2">
+            <AlertTriangle className="w-5 h-5 text-yellow-400" />
+          </div>
+        )}
       </div>
       <CardHeader>
         <div className="flex justify-between items-start">
@@ -63,13 +82,10 @@ const ProjectCard = ({
             variant="outline"
             size="sm"
             className="flex-1"
-            asChild
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e) => handleInteraction(e, demoUrl)}
           >
-            <a href={demoUrl} target="_blank" rel="noopener noreferrer">
-              <Eye className="mr-1 h-4 w-4" />
-              Demo
-            </a>
+            <Eye className="mr-1 h-4 w-4" />
+            Demo
           </Button>
         )}
         {githubUrl && (
@@ -77,13 +93,21 @@ const ProjectCard = ({
             variant="outline"
             size="sm"
             className="flex-1"
-            asChild
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e) => handleInteraction(e, githubUrl)}
           >
-            <a href={githubUrl} target="_blank" rel="noopener noreferrer">
-              <Github className="mr-1 h-4 w-4" />
-              Code
-            </a>
+            <Github className="mr-1 h-4 w-4" />
+            Code
+          </Button>
+        )}
+        {!githubUrl && alert && (
+          <Button
+            variant="outline"
+            size="sm"
+            className="flex-1"
+            onClick={(e) => handleInteraction(e)}
+          >
+            <Github className="mr-1 h-4 w-4" />
+            Code
           </Button>
         )}
       </CardFooter>

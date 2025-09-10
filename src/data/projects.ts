@@ -87,6 +87,8 @@ export const projects: Project[] = [
     image: '/bookingsystem.png',
     demoUrl: 'https://booking-client-nu.vercel.app/',
     githubUrl: 'https://github.com/RomanDivkovic/booking-calender',
+    alert:
+      'This project has been updated to V2, which has improved features. You can still view the V1 demo or browse the source code.',
   },
   {
     id: 'calender-system-v2',

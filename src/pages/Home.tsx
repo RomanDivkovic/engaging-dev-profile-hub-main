@@ -126,6 +126,7 @@ const Home = () => {
               image={project.image}
               demoUrl={project.demoUrl}
               githubUrl={project.githubUrl}
+              alert={project.alert}
               featured={true}
             />
           ))}
