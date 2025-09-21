@@ -6,23 +6,31 @@ import { BrowserRouter } from 'react-router-dom'
 import NavBar from './components/NavBar'
 import Footer from './components/Footer'
 import PageTransitionRoutes from './PageTransitionRoutes'
+import { OfflineIndicator } from './components/OfflineIndicator'
+import { useServiceWorker } from './hooks/use-service-worker'
+import { useOnlineStatus } from './hooks/use-online-status'
+import { OfflineContent } from './components/OfflineContent'
 
 const queryClient = new QueryClient()
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <NavBar />
-        <main>
-          <PageTransitionRoutes />
-        </main>
-        <Footer />
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-)
+const App = () => {
+  useServiceWorker()
+  const { isOnline } = useOnlineStatus()
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <OfflineIndicator />
+          {isOnline && <NavBar />}
+          <main>{isOnline ? <PageTransitionRoutes /> : <OfflineContent />}</main>
+          {isOnline && <Footer />}
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  )
+}
 
 export default App

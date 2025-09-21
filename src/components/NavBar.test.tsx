@@ -22,7 +22,7 @@ describe('NavBar', () => {
       </MemoryRouter>
     )
     // Open mobile menu
-    const menuButton = screen.getByLabelText(/menu/i)
+    const menuButton = screen.getByLabelText('Menu')
     fireEvent.click(menuButton)
     const mobileAboutLink = screen.getByTestId('mobile-nav-about')
     expect(mobileAboutLink).toBeVisible()

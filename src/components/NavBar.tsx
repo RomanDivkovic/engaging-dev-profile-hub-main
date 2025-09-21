@@ -48,7 +48,7 @@ const NavBar = () => {
       className={cn(
         'fixed top-0 w-full z-50 transition-all duration-300',
         isScrolled
-          ? 'bg-background/80 backdrop-blur-md shadow-sm dark:bg-background/70'
+          ? 'bg-background/95 backdrop-blur-md shadow-sm border-b border-border/50'
           : 'bg-transparent'
       )}
     >
@@ -128,13 +128,25 @@ const NavBar = () => {
       <div
         data-testid="mobile-menu"
         className={cn(
-          'md:hidden bg-background/95 dark:bg-background/95 backdrop-blur-md transition-transform duration-300 ease-in-out transform',
+          'md:hidden bg-background/98 backdrop-blur-md transition-transform duration-300 ease-in-out transform border-r border-border/50',
           isOpen ? 'translate-x-0' : '-translate-x-full',
           'fixed inset-y-0 left-0 w-full h-screen'
         )}
       >
-        <div className="px-6 py-20 space-y-8 flex flex-col h-full">
-          <div className="space-y-6">
+        <div className="px-6 py-6 flex flex-col h-full">
+          {/* Close button */}
+          <div className="flex justify-end mb-4">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsOpen(false)}
+              aria-label="Close menu"
+            >
+              <X className="h-6 w-6" />
+            </Button>
+          </div>
+
+          <div className="space-y-6 flex-1">
             <NavLink
               to="/"
               data-testid="mobile-nav-home"
@@ -210,14 +222,33 @@ const NavBar = () => {
               <a href="/files/cv.pdf" target="_blank" rel="noopener noreferrer" aria-label="CV">
                 <FileText className="h-6 w-6 hover:text-secondary transition-colors" />
               </a>
-              <a
-                href="https://github.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Projects"
+              <button
+                onClick={() => {
+                  // Show a fun message or animation
+                  const messages = [
+                    "You're already on my website! 🚀",
+                    'Welcome to my digital home! 🏠',
+                    "Here you'll find everything about me and my projects! 💻",
+                    'Thanks for visiting my portfolio! 🙏',
+                  ]
+                  const randomMessage = messages[Math.floor(Math.random() * messages.length)]
+
+                  // Use toast notification
+                  import('sonner')
+                    .then(({ toast }) => {
+                      toast.success(randomMessage, {
+                        duration: 3000,
+                      })
+                    })
+                    .catch(() => {
+                      alert(randomMessage)
+                    })
+                }}
+                className="hover:text-secondary transition-colors p-0 bg-transparent border-none"
+                aria-label="You're already here!"
               >
-                <Code className="h-6 w-6 hover:text-secondary transition-colors" />
-              </a>
+                <Code className="h-6 w-6" />
+              </button>
             </div>
           </div>
         </div>
