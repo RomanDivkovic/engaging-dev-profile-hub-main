@@ -9,6 +9,13 @@ export interface Project {
   demoUrl?: string
   githubUrl?: string
   alert?: string
+  upgradePrompt?: {
+    title: string
+    message: string
+    upgradeUrl: string
+    upgradeLabel: string
+    stayLabel: string
+  }
   featured?: boolean
 }
 
@@ -87,8 +94,14 @@ export const projects: Project[] = [
     image: '/bookingsystem.png',
     demoUrl: 'https://booking-client-nu.vercel.app/',
     githubUrl: 'https://github.com/RomanDivkovic/booking-calender',
-    alert:
-      'This project has been updated to V2, which has improved features. You can still view the V1 demo or browse the source code.',
+    upgradePrompt: {
+      title: 'Newer Version Available',
+      message:
+        'This project has been updated to V2 with improved features and user experience. Would you like to view the newer version instead?',
+      upgradeUrl: 'https://bookingsystems.vercel.app/',
+      upgradeLabel: 'View V2 (Recommended)',
+      stayLabel: 'Stay on V1',
+    },
   },
   {
     id: 'calender-system-v2',
