@@ -132,12 +132,13 @@ const Home = () => {
           ))}
         </div>
         <div className="mt-12 text-center">
-          <Button asChild>
-            <Link to="/projects">
-              View All Projects
-              <ChevronRight className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
+          <Link
+            to="/projects"
+            className="inline-flex items-center px-6 py-3 text-lg font-medium text-foreground hover:text-secondary transition-colors duration-300 relative after:absolute after:left-0 after:right-0 after:bottom-0 after:h-0.5 after:origin-center after:scale-x-0 after:bg-secondary after:transition-transform hover:after:scale-x-100"
+          >
+            View All Projects
+            <ChevronRight className="ml-2 h-4 w-4" />
+          </Link>
         </div>
       </Section>
 
@@ -226,12 +227,13 @@ const Home = () => {
             Whether you have a specific project in mind or just want to discuss some ideas, I'm
             always open to new opportunities and collaborations.
           </p>
-          <Button asChild size="lg">
-            <Link to="/contact">
-              Let's Work Together
-              <ChevronRight className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
+          <Link
+            to="/contact"
+            className="inline-flex items-center px-6 py-3 text-lg font-medium text-foreground hover:text-secondary transition-colors duration-300 relative after:absolute after:left-0 after:right-0 after:bottom-0 after:h-0.5 after:origin-center after:scale-x-0 after:bg-secondary after:transition-transform hover:after:scale-x-100"
+          >
+            Let's Work Together
+            <ChevronRight className="ml-2 h-4 w-4" />
+          </Link>
         </div>
       </Section>
     </>
