@@ -2,11 +2,7 @@ import * as React from 'react'
 import { useIsMobile } from '../../../hooks/use-mobile'
 import { TooltipProvider } from '../tooltip'
 import { SidebarContextValue } from './sidebar-context'
-import {
-  SIDEBAR_COOKIE_NAME,
-  SIDEBAR_COOKIE_MAX_AGE,
-  SIDEBAR_KEYBOARD_SHORTCUT,
-} from './sidebar-constants'
+import { SIDEBAR_COOKIE_NAME, SIDEBAR_COOKIE_MAX_AGE } from './sidebar-constants'
 
 export const SidebarProvider = React.forwardRef<
   HTMLDivElement,

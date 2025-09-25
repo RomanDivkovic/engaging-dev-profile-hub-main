@@ -1,6 +1,5 @@
 import { NavLink } from 'react-router-dom'
 import { cn } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
 import { Home, User, Briefcase, Mail } from 'lucide-react'
 import { SocialLinks } from './SocialLinks'
 

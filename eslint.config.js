@@ -23,7 +23,12 @@ export default [
         ecmaVersion: 2020,
         sourceType: 'module',
       },
-      env: { browser: true, es2020: true },
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+        React: 'readonly',
+        process: 'readonly',
+      },
     },
     plugins: {
       'react-hooks': reactHooks,
@@ -40,7 +45,12 @@ export default [
   {
     files: ['**/*.test.{ts,tsx,js,jsx}', 'src/**/__tests__/**'],
     languageOptions: {
-      env: { jest: true, es2021: true },
+      globals: {
+        ...globals.jest,
+        ...globals.browser,
+        ...globals.node,
+        React: 'readonly',
+      },
     },
     rules: {},
   },
@@ -48,7 +58,7 @@ export default [
   {
     files: ['public/**/*.js', 'dist/**/*.js'],
     languageOptions: {
-      env: { browser: true },
+      globals: globals.browser,
     },
     rules: {},
   },
@@ -56,7 +66,7 @@ export default [
   {
     files: ['**/*.cjs', 'scripts/**', 'vite.config.*', 'postcss.config.*'],
     languageOptions: {
-      env: { node: true },
+      globals: globals.node,
     },
     rules: {},
   },

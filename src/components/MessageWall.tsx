@@ -25,7 +25,7 @@ export function MessageWall() {
   const [banned, setBanned] = useState(false)
   const [pendingMessages, setPendingMessages] = useState<string[]>([])
   const [currentIdx, setCurrentIdx] = useState(0)
-  const timerRef = useRef<NodeJS.Timeout | null>(null)
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const { isOnline } = useOnlineStatus()
 
   // Load pending messages from localStorage on mount
@@ -93,6 +93,7 @@ export function MessageWall() {
       setInput('')
     } catch (err) {
       // If sending fails, save locally as fallback
+      console.error('Failed to send message:', err)
       setPendingMessages((prev) => [...prev, messageText])
       setError('Failed to send message. Saved locally for later.')
     }
