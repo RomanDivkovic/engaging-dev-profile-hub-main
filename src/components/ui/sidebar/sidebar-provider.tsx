@@ -2,11 +2,7 @@ import * as React from 'react'
 import { useIsMobile } from '../../../hooks/use-mobile'
 import { TooltipProvider } from '../tooltip'
 import { SidebarContextValue } from './sidebar-context'
-import {
-  SIDEBAR_COOKIE_NAME,
-  SIDEBAR_COOKIE_MAX_AGE,
-  SIDEBAR_KEYBOARD_SHORTCUT,
-} from './sidebar-constants'
+import { SIDEBAR_COOKIE_NAME, SIDEBAR_COOKIE_MAX_AGE } from './sidebar-constants'
 
 export const SidebarProvider = React.forwardRef<
   HTMLDivElement,
@@ -36,8 +32,8 @@ export const SidebarProvider = React.forwardRef<
     const [_open, _setOpen] = React.useState(defaultOpen)
     const open = openProp ?? _open
     const setOpen = React.useCallback(
-      (value: boolean | ((value: boolean) => boolean)) => {
-        const openState = typeof value === 'function' ? value(open) : value
+      (value: boolean | ((prevValue: boolean) => boolean)) => {
+        const openState = typeof value === 'function' ? value(openProp ?? _open) : value
         if (setOpenProp) {
           setOpenProp(openState)
         } else {
@@ -47,12 +43,14 @@ export const SidebarProvider = React.forwardRef<
         // This sets the cookie to keep the sidebar state.
         document.cookie = `${SIDEBAR_COOKIE_NAME}=${openState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`
       },
-      [setOpenProp, open]
+      [setOpenProp, openProp, _open]
     )
 
     // Helper to toggle the sidebar.
     const toggleSidebar = React.useCallback(() => {
-      return isMobile ? setOpenMobile((open) => !open) : setOpen((open) => !open)
+      return isMobile
+        ? setOpenMobile((currentOpen) => !currentOpen)
+        : setOpen((currentOpen) => !currentOpen)
     }, [isMobile, setOpen, setOpenMobile])
 
     // Adds a keyboard shortcut to toggle the sidebar.

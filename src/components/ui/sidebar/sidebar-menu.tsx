@@ -68,7 +68,6 @@ export const SidebarMenuButton = React.forwardRef<
       isActive = false,
       variant = 'default',
       size = 'default',
-      tooltip,
       className,
       ...props
     },

@@ -29,7 +29,7 @@ jobs:
           keys:
             - v1-deps-{{ checksum "package-lock.json" }}
             - v1-deps-
-      - run: npm run lint || npx eslint .
+      - run: npm run lint
 
   test:
     executor: node-executor

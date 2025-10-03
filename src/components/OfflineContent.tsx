@@ -5,8 +5,6 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { RefreshCw, MessageSquare, Briefcase } from 'lucide-react'
 
-type StoredMessage = string
-
 export const OfflineContent = () => {
   const { isOnline } = useOnlineStatus()
   const { storedMessages, hasStoredMessages } = useOfflineStorage()

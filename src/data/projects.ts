@@ -92,7 +92,7 @@ export const projects: Project[] = [
       'Real-time booking updates',
     ],
     image: '/bookingsystem.png',
-    demoUrl: 'https://booking-client-nu.vercel.app/',
+    demoUrl: 'https://bookingsystems.vercel.app/',
     githubUrl: 'https://github.com/RomanDivkovic/booking-calender',
     upgradePrompt: {
       title: 'Newer Version Available',
