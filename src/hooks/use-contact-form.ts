@@ -17,6 +17,7 @@ type FormValues = z.infer<typeof formSchema>
 
 // Polyfill confetti for non-browser (test) environments
 const isTest = typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 'test'
+// eslint-disable-next-line no-unused-vars
 let confetti: (...args: unknown[]) => void = () => {}
 if (!isTest && typeof window !== 'undefined') {
   import('canvas-confetti').then((mod) => {

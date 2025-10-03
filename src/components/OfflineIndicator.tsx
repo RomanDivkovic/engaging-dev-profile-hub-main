@@ -1,4 +1,4 @@
-import { AlertTriangle, Wifi, WifiOff } from 'lucide-react'
+import { Wifi, WifiOff } from 'lucide-react'
 import { useOnlineStatus } from '@/hooks/use-online-status'
 
 export const OfflineIndicator = () => {
