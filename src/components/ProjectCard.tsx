@@ -53,12 +53,13 @@ const ProjectCard = ({
       <div className="aspect-video w-full overflow-hidden relative">
         <img
           src={image}
-          alt={title}
+          alt={`Screenshot of ${title} - ${description.slice(0, 60)}${description.length > 60 ? '...' : ''}`}
           className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110 group-hover:brightness-105"
+          loading="lazy"
         />
         {alert && (
-          <div className="absolute top-2 right-2">
-            <AlertTriangle className="w-5 h-5 text-yellow-400" />
+          <div className="absolute top-2 right-2" role="img" aria-label="Warning">
+            <AlertTriangle className="w-5 h-5 text-yellow-400" aria-hidden="true" />
           </div>
         )}
       </div>
