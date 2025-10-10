@@ -34,10 +34,14 @@ const NavBar = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <div className="flex items-center">
-              <NavLink to="/" className="flex items-center gap-2">
+              <NavLink
+                to="/"
+                className="flex items-center gap-2"
+                aria-label="Roman Divković - Home"
+              >
                 <img
                   src="/uploads/a6e4ee57-a5ff-483a-b6e1-71809843ead5.png"
-                  alt="RD Logo"
+                  alt="Roman Divković logo"
                   className="h-20 w-20"
                 />
                 <span
@@ -45,6 +49,7 @@ const NavBar = () => {
                     'font-semibold text-lg tracking-tight transition-colors',
                     isProfile && 'text-secondary underline underline-offset-4'
                   )}
+                  aria-current={isProfile ? 'page' : undefined}
                 >
                   Roman Divković
                 </span>

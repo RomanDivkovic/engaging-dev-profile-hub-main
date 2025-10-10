@@ -108,7 +108,7 @@ export const projects: Project[] = [
     title: 'Booking Calendar System (V2)',
     description:
       'An improved version of the booking calendar application with enhanced features and user experience, allowing users to manage bookings more efficiently.',
-    role: 'I redesigned the application architecture, improved the user interface, and added new features based on user feedback, ensuring a seamless booking experience.',
+    role: 'I redesigned the application architecture, improved the user interface, and added new features based on user feedback, ensuring a seamless booking experience while trying out supabase.',
     technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Vite', 'Supabase', 'PostgreSQL', 'Jest'],
     features: [
       'Enhanced user interface with better navigation',
@@ -120,6 +120,31 @@ export const projects: Project[] = [
     image: '/bookingsystemv2.png',
     demoUrl: 'https://booking-client-nu.vercel.app/',
     githubUrl: 'https://github.com/RomanDivkovic/Booking-client',
+  },
+  {
+    id: 'calender-system-v3',
+    title: 'Family Calendar System (V3)',
+    description:
+      'A Vue.js-based family calendar application built to compare Vue and React frameworks. Features authentication, real-time updates, and booking management for shared household resources.',
+    role: 'I developed this application to gain hands-on experience with Vue.js and compare it with React. Implemented the complete stack using Vue 3, TypeScript, Firebase Authentication, Firestore, and Firebase Functions.',
+    technologies: [
+      'Vue 3',
+      'TypeScript',
+      'Firebase Auth',
+      'Firestore',
+      'Firebase Functions',
+      'Tailwind CSS',
+    ],
+    features: [
+      'Vue 3 Composition API implementation',
+      'Firebase Authentication integration',
+      'Real-time booking synchronization with Firestore',
+      'Serverless backend with Firebase Functions',
+      'Framework comparison study (Vue vs React)',
+    ],
+    image: '/bookingsystem.png',
+    demoUrl: 'https://vue-famcal.vercel.app/',
+    githubUrl: 'https://github.com/RomanDivkovic/vue-famcal',
   },
   {
     id: 'portfolio',

@@ -42,9 +42,9 @@ describe('Contact form', () => {
         <Contact />
       </>
     )
-    expect(screen.getByLabelText(/name/i)).toBeInTheDocument()
-    expect(screen.getByLabelText(/email/i)).toBeInTheDocument()
-    expect(screen.getByLabelText(/message/i)).toBeInTheDocument()
+    expect(screen.getByPlaceholderText(/your name/i)).toBeInTheDocument()
+    expect(screen.getByPlaceholderText(/your.email@example.com/i)).toBeInTheDocument()
+    expect(screen.getByPlaceholderText(/your message here/i)).toBeInTheDocument()
     expect(screen.getByRole('button', { name: /send message/i })).toBeInTheDocument()
   })
 
@@ -55,13 +55,13 @@ describe('Contact form', () => {
         <Contact />
       </>
     )
-    fireEvent.change(screen.getByLabelText(/name/i), {
+    fireEvent.change(screen.getByPlaceholderText(/your name/i), {
       target: { value: 'Test User' },
     })
-    fireEvent.change(screen.getByLabelText(/email/i), {
+    fireEvent.change(screen.getByPlaceholderText(/your.email@example.com/i), {
       target: { value: 'test@example.com' },
     })
-    fireEvent.change(screen.getByLabelText(/message/i), {
+    fireEvent.change(screen.getByPlaceholderText(/your message here/i), {
       target: { value: 'This is a test message.' },
     })
     fireEvent.click(screen.getByRole('button', { name: /send message/i }))
@@ -90,13 +90,13 @@ describe('Contact form', () => {
         <Contact />
       </>
     )
-    fireEvent.change(screen.getByLabelText(/name/i), {
+    fireEvent.change(screen.getByPlaceholderText(/your name/i), {
       target: { value: 'Test User' },
     })
-    fireEvent.change(screen.getByLabelText(/email/i), {
+    fireEvent.change(screen.getByPlaceholderText(/your.email@example.com/i), {
       target: { value: 'test@example.com' },
     })
-    fireEvent.change(screen.getByLabelText(/message/i), {
+    fireEvent.change(screen.getByPlaceholderText(/your message here/i), {
       target: { value: 'This is a test message.' },
     })
     fireEvent.click(screen.getByRole('button', { name: /send message/i }))
@@ -118,13 +118,13 @@ describe('Contact form', () => {
         <Contact />
       </>
     )
-    fireEvent.change(screen.getByLabelText(/name/i), {
+    fireEvent.change(screen.getByPlaceholderText(/your name/i), {
       target: { value: 'Test User' },
     })
-    fireEvent.change(screen.getByLabelText(/email/i), {
+    fireEvent.change(screen.getByPlaceholderText(/your.email@example.com/i), {
       target: { value: 'test@example.com' },
     })
-    fireEvent.change(screen.getByLabelText(/message/i), {
+    fireEvent.change(screen.getByPlaceholderText(/your message here/i), {
       target: { value: 'This is a test message.' },
     })
     fireEvent.click(screen.getByRole('button', { name: /send message/i }))

@@ -25,11 +25,21 @@ export const ContactForm = () => {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Name</FormLabel>
+                <FormLabel>
+                  Name{' '}
+                  <span className="text-destructive" aria-label="required">
+                    *
+                  </span>
+                </FormLabel>
                 <FormControl>
-                  <Input placeholder="Your name" {...field} />
+                  <Input
+                    placeholder="Your name"
+                    {...field}
+                    aria-required="true"
+                    aria-invalid={!!form.formState.errors.name}
+                  />
                 </FormControl>
-                <FormMessage />
+                <FormMessage role="alert" />
               </FormItem>
             )}
           />
@@ -39,11 +49,23 @@ export const ContactForm = () => {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel>
+                  Email{' '}
+                  <span className="text-destructive" aria-label="required">
+                    *
+                  </span>
+                </FormLabel>
                 <FormControl>
-                  <Input placeholder="your.email@example.com" {...field} />
+                  <Input
+                    type="email"
+                    placeholder="your.email@example.com"
+                    {...field}
+                    aria-required="true"
+                    aria-invalid={!!form.formState.errors.email}
+                    autoComplete="email"
+                  />
                 </FormControl>
-                <FormMessage />
+                <FormMessage role="alert" />
               </FormItem>
             )}
           />
@@ -53,15 +75,22 @@ export const ContactForm = () => {
             name="message"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Message</FormLabel>
+                <FormLabel>
+                  Message{' '}
+                  <span className="text-destructive" aria-label="required">
+                    *
+                  </span>
+                </FormLabel>
                 <FormControl>
                   <Textarea
                     placeholder="Your message here..."
                     className="min-h-[150px]"
                     {...field}
+                    aria-required="true"
+                    aria-invalid={!!form.formState.errors.message}
                   />
                 </FormControl>
-                <FormMessage />
+                <FormMessage role="alert" />
               </FormItem>
             )}
           />
@@ -81,13 +110,18 @@ export const ContactForm = () => {
             )}
           </Button>
           {showSuccess && (
-            <div className="mt-6 flex flex-col items-center animate-fade-in">
+            <div
+              className="mt-6 flex flex-col items-center animate-fade-in"
+              role="status"
+              aria-live="polite"
+            >
               <svg
                 className="w-16 h-16 text-green-500 mb-2"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"
                 viewBox="0 0 24 24"
+                aria-hidden="true"
               >
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
               </svg>

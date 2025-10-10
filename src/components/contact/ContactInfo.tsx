@@ -13,9 +13,13 @@ export const ContactInfo = () => {
 
         <div className="space-y-6">
           <div className="flex items-start">
-            <div className="bg-muted rounded-full p-3 mr-4">
+            <a
+              href={`mailto:${contactInfo.email}`}
+              className="bg-muted rounded-full p-3 mr-4 hover:bg-secondary/20 transition-colors cursor-pointer"
+              aria-label="Send email"
+            >
               <Mail className="h-5 w-5 text-secondary" />
-            </div>
+            </a>
             <div>
               <h3 className="font-medium mb-1">Email</h3>
               <a
@@ -28,9 +32,13 @@ export const ContactInfo = () => {
           </div>
 
           <div className="flex items-start">
-            <div className="bg-muted rounded-full p-3 mr-4">
+            <a
+              href={`tel:${contactInfo.phone.replace(/\s/g, '')}`}
+              className="bg-muted rounded-full p-3 mr-4 hover:bg-secondary/20 transition-colors cursor-pointer"
+              aria-label="Call phone number"
+            >
               <Phone className="h-5 w-5 text-secondary" />
-            </div>
+            </a>
             <div>
               <h3 className="font-medium mb-1">Phone</h3>
               <a
@@ -43,9 +51,14 @@ export const ContactInfo = () => {
           </div>
 
           <div className="flex items-start">
-            <div className="bg-muted rounded-full p-3 mr-4">
+            <button
+              type="button"
+              onClick={() => setMapOpen(true)}
+              className="bg-muted rounded-full p-3 mr-4 hover:bg-secondary/20 transition-colors cursor-pointer"
+              aria-label="Open location in map"
+            >
               <MapPin className="h-5 w-5 text-secondary" />
-            </div>
+            </button>
             <div>
               <h3 className="font-medium mb-1">Location</h3>
               <button
