@@ -24,10 +24,12 @@ export const projects: Project[] = [
     id: 'betbuddys',
     title: 'BetBuddys',
     description:
-      'A webapp for creating groups and betting with friends on UFC/PPV events, featuring a comprehensive point system and league tables.',
-    role: 'As the fullstack developer, I designed the entire architecture, implemented the React-based frontend and built the backend logic for real-time updates and score calculations.',
+      'A webapp for creating groups and betting with friends on UFC/PPV events, featuring a comprehensive point system and league tables. Also available as a React Native mobile app (in development) for iOS and Android.',
+    role: 'As the fullstack developer, I designed the entire architecture, implemented the React-based frontend and built the backend logic for real-time updates and score calculations. I also developed a companion mobile app using React Native Expo.',
     technologies: [
       'React',
+      'React Native',
+      'Expo',
       'Firebase',
       'Firestore',
       'Tailwind CSS',
@@ -41,11 +43,12 @@ export const projects: Project[] = [
       'League table with live updates',
       'Result calculation with fight outcomes',
       'Annual rankings for participants',
+      'Mobile app with same functionality as web version',
     ],
     image: '/betbuddys.png',
     demoUrl: 'https://betbuddys.app/',
     alert:
-      'The BetBuddys repository is private. Please contact me to request access if you would like to view the code.',
+      'The BetBuddys web repository is private. Mobile app code is also private repo (in development, not yet published to app stores).',
     featured: true,
   },
   {
@@ -145,6 +148,34 @@ export const projects: Project[] = [
     image: '/bookingsystem.png',
     demoUrl: 'https://vue-famcal.vercel.app/',
     githubUrl: 'https://github.com/RomanDivkovic/vue-famcal',
+  },
+  {
+    id: 'famcal-mobile',
+    title: 'Family Calendar Mobile App',
+    description:
+      'A React Native mobile application for family calendar management, built to sync bookings with the web versions. Features phone calendar integration and cross-platform compatibility for iOS and Android.',
+    role: 'I developed this mobile app to extend the calendar system to mobile devices, implementing React Native components and working on phone calendar synchronization features. The app provides the same core functionality as V2 with mobile-specific enhancements.',
+    technologies: [
+      'React Native',
+      'Expo',
+      'TypeScript',
+      'Supabase',
+      'PostgreSQL',
+      'Native Calendar API',
+      'Cross-platform mobile development',
+    ],
+    features: [
+      'Cross-platform mobile app (iOS/Android)',
+      "Sync with phone's native calendar",
+      'Same core features as web V2',
+      'Real-time booking notifications',
+      'Mobile-optimized user interface',
+      'Work in progress - calendar sync development',
+    ],
+    image: '/bookingsystem.png',
+    githubUrl: 'https://github.com/RomanDivkovic/famcal-app',
+    alert:
+      'Mobile app is in development. Core functionality works but calendar sync with phone is still being implemented.',
   },
   {
     id: 'portfolio',
