@@ -84,7 +84,7 @@ export const ContactInfo = () => {
               className="bg-muted hover:bg-secondary/20 transition-colors rounded-full p-3"
               aria-label="GitHub"
             >
-              <Github className="h-5 w-5" />
+              <Github className="h-5 w-5 text-foreground" />
             </a>
             <a
               href={contactInfo.socialLinks.linkedin}
@@ -93,7 +93,7 @@ export const ContactInfo = () => {
               className="bg-muted hover:bg-secondary/20 transition-colors rounded-full p-3"
               aria-label="LinkedIn"
             >
-              <Linkedin className="h-5 w-5" />
+              <Linkedin className="h-5 w-5 text-foreground" />
             </a>
           </div>
         </div>
