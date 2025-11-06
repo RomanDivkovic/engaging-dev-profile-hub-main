@@ -18,7 +18,7 @@ export const ContactInfo = () => {
               className="bg-muted rounded-full p-3 mr-4 hover:bg-secondary/20 transition-colors cursor-pointer"
               aria-label="Send email"
             >
-              <Mail className="h-5 w-5 text-secondary" />
+              <Mail className="h-5 w-5 text-foreground" />
             </a>
             <div>
               <h3 className="font-medium mb-1">Email</h3>
@@ -37,7 +37,7 @@ export const ContactInfo = () => {
               className="bg-muted rounded-full p-3 mr-4 hover:bg-secondary/20 transition-colors cursor-pointer"
               aria-label="Call phone number"
             >
-              <Phone className="h-5 w-5 text-secondary" />
+              <Phone className="h-5 w-5 text-foreground" />
             </a>
             <div>
               <h3 className="font-medium mb-1">Phone</h3>
@@ -57,7 +57,7 @@ export const ContactInfo = () => {
               className="bg-muted rounded-full p-3 mr-4 hover:bg-secondary/20 transition-colors cursor-pointer"
               aria-label="Open location in map"
             >
-              <MapPin className="h-5 w-5 text-secondary" />
+              <MapPin className="h-5 w-5 text-foreground" />
             </button>
             <div>
               <h3 className="font-medium mb-1">Location</h3>

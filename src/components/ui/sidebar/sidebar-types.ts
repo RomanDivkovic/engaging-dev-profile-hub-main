@@ -1,9 +1,9 @@
 export type SidebarContext = {
   state: 'expanded' | 'collapsed'
   open: boolean
-  setOpen: (open: boolean | ((open: boolean) => boolean)) => void
+  setOpen: (value: boolean | ((prev: boolean) => boolean)) => void
   openMobile: boolean
-  setOpenMobile: (open: boolean | ((open: boolean) => boolean)) => void
+  setOpenMobile: (value: boolean | ((prev: boolean) => boolean)) => void
   isMobile: boolean
   toggleSidebar: () => void
 }
