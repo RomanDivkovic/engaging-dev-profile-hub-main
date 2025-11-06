@@ -21,8 +21,8 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    id: 'betbuddys',
-    title: 'BetBuddys',
+    id: 'vue-calendar',
+    title: 'Vue Calendar',
     description:
       'A webapp for creating groups and betting with friends on UFC/PPV events, featuring a comprehensive point system and league tables. Also available as a React Native mobile app (in development) for iOS and Android.',
     role: 'As the fullstack developer, I designed the entire architecture, implemented the React-based frontend and built the backend logic for real-time updates and score calculations. I also developed a companion mobile app using React Native Expo.',
@@ -154,7 +154,7 @@ export const projects: Project[] = [
     demoUrl: 'https://booking-client-nu.vercel.app/',
   },
   {
-    id: 'our-pets2',
+    id: 'our-pets',
     title: 'Our Pets',
     description:
       'A redesigned calendar app with enhanced features, modern UI, and improved performance. Built for scalability and future growth.',
