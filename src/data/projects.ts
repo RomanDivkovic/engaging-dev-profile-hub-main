@@ -21,8 +21,8 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    id: 'vue-calendar',
-    title: 'Vue Calendar',
+    id: 'betbuddys',
+    title: 'BetBuddys',
     description:
       'A webapp for creating groups and betting with friends on UFC/PPV events, featuring a comprehensive point system and league tables. Also available as a React Native mobile app (in development) for iOS and Android.',
     role: 'As the fullstack developer, I designed the entire architecture, implemented the React-based frontend and built the backend logic for real-time updates and score calculations. I also developed a companion mobile app using React Native Expo.',
@@ -130,7 +130,7 @@ export const projects: Project[] = [
       'A web calendar built with Vue.js, designed for intuitive event and schedule management. Focuses on simplicity and user experience for desktop users.',
     role: '',
     technologies: ['Vue.js', 'TypeScript', 'Tailwind CSS', 'Firebase'],
-    image: '/bookingsystem.png',
+    image: '/vuecal.png',
     demoUrl: 'https://vue-famcal.vercel.app/',
   },
   {
@@ -140,18 +140,18 @@ export const projects: Project[] = [
       'A mobile-first calendar app for organizing tasks and appointments on the go. Optimized for touch devices and quick interactions.',
     role: '',
     technologies: ['React Native', 'Expo', 'TypeScript', 'Supabase'],
-    image: '/bookingsystem.png',
+    image: '/famcamobile.png',
     demoUrl: 'https://github.com/RomanDivkovic/famcal-app',
   },
   {
     id: 'calender-system-v2',
-    title: 'Booking Calendar System (V2)',
+    title: 'Booking Calendar System',
     description:
       'A redesigned calendar app with enhanced features, modern UI, and improved performance. Built for scalability and future growth.',
     role: '',
     technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Vite', 'Supabase'],
     image: '/bookingsystemv2.png',
-    demoUrl: 'https://booking-client-nu.vercel.app/',
+    demoUrl: 'https://www.famcaly.com/',
   },
   {
     id: 'our-pets',
