@@ -21,6 +21,38 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: 'basketball-manager',
+    title: 'Basketball Manager',
+    description:
+      'A comprehensive basketball simulation game featuring realistic NBA/NCAA gameplay, interactive console controls, and advanced tactical management. Simulate full 48-minute games with detailed play-by-play commentary, player fatigue, substitutions, timeouts, and live statistics.',
+    role: 'As the sole developer, I architected and implemented the entire C++ game engine from scratch, including possession-based simulation, tactical AI, fatigue systems, and interactive controls. Built a modular system with SQLite database integration for team/player management.',
+    technologies: [
+      'C++20',
+      'CMake',
+      'SQLite3',
+      'Lua',
+      'Python',
+      'Git',
+    ],
+    features: [
+      'Realistic NBA-level scoring (180-240 combined points per game)',
+      'Interactive console game mode with pause/resume controls',
+      'Jump ball & possession arrow system following real basketball rules',
+      'Timeout management (3 per half with fatigue recovery)',
+      'Manual substitutions with 12-player rotations',
+      'Live player stats (PTS/REB/AST/MIN/FATIGUE)',
+      'Variable simulation speeds (1x real-time to 6x fastest)',
+      'Tactical strategies (offensive/defensive systems)',
+      'Detailed play-by-play commentary (passes, scores, steals, blocks, fouls)',
+      'Auto-substitution based on fatigue and minute plans',
+    ],
+    image: '/basketball-manager.jpg',
+    githubUrl: 'https://github.com/RomanDivkovic/basketball-manager',
+    alert:
+      'Console-based game currently playable. Web UI and Unity 3D versions in development.',
+    featured: true,
+  },
+  {
     id: 'betbuddys',
     title: 'BetBuddys',
     description:
