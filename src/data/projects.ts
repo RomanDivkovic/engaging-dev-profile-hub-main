@@ -164,7 +164,7 @@ export const projects: Project[] = [
       'A mobile-first calendar app for organizing tasks and appointments on the go. Optimized for touch devices and quick interactions.',
     role: '',
     technologies: ['React Native', 'Expo', 'TypeScript', 'Supabase'],
-    image: '/famcamobile.png',
+    image: '/famcalymobile.png',
     demoUrl: 'https://github.com/RomanDivkovic/famcal-app',
   },
   {

@@ -10,6 +10,7 @@ import { OfflineIndicator } from './components/OfflineIndicator'
 import { useServiceWorker } from './hooks/use-service-worker'
 import { useOnlineStatus } from './hooks/use-online-status'
 import { OfflineContent } from './components/OfflineContent'
+import ErrorBoundary from './components/ErrorBoundary'
 
 const queryClient = new QueryClient()
 
@@ -33,7 +34,11 @@ const App = () => {
         <BrowserRouter>
           <OfflineIndicator />
           {isOnline && <NavBar />}
-          <main id="main-content">{isOnline ? <PageTransitionRoutes /> : <OfflineContent />}</main>
+          <main id="main-content">
+            <ErrorBoundary>
+              {isOnline ? <PageTransitionRoutes /> : <OfflineContent />}
+            </ErrorBoundary>
+          </main>
           {isOnline && <Footer />}
         </BrowserRouter>
       </TooltipProvider>

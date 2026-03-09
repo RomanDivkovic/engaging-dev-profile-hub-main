@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Eye, Github, AlertTriangle } from 'lucide-react'
@@ -30,6 +31,18 @@ const ProjectCard = ({
   featured = false,
   onClick,
 }: ProjectCardProps) => {
+  const [imageError, setImageError] = useState(false)
+  const [imageLoaded, setImageLoaded] = useState(false)
+
+  const handleImageError = () => {
+    console.error(`Failed to load image for project: ${title}`)
+    setImageError(true)
+  }
+
+  const handleImageLoad = () => {
+    setImageLoaded(true)
+  }
+
   const handleInteraction = (e: React.MouseEvent, url?: string) => {
     e.stopPropagation()
     if (alert) {
@@ -50,13 +63,27 @@ const ProjectCard = ({
       )}
       onClick={onClick}
     >
-      <div className="aspect-video w-full overflow-hidden relative">
-        <img
-          src={image}
-          alt={`Screenshot of ${title} - ${description.slice(0, 60)}${description.length > 60 ? '...' : ''}`}
-          className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110 group-hover:brightness-105"
-          loading="lazy"
-        />
+      <div className="aspect-video w-full overflow-hidden relative bg-muted/20">
+        {!imageError ? (
+          <img
+            src={image}
+            alt={`Screenshot of ${title} - ${description.slice(0, 60)}${description.length > 60 ? '...' : ''}`}
+            className={cn(
+              'w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110 group-hover:brightness-105',
+              !imageLoaded && 'opacity-0'
+            )}
+            loading="lazy"
+            onError={handleImageError}
+            onLoad={handleImageLoad}
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center bg-muted/50">
+            <div className="text-center p-4">
+              <AlertTriangle className="w-8 h-8 mx-auto mb-2 text-muted-foreground" />
+              <p className="text-sm text-muted-foreground">Image unavailable</p>
+            </div>
+          </div>
+        )}
         {alert && (
           <div className="absolute top-2 right-2" role="img" aria-label="Warning">
             <AlertTriangle className="w-5 h-5 text-yellow-400" aria-hidden="true" />
