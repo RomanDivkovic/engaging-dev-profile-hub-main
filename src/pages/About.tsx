@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
-import Section from '@/components/Section'
-import Timeline from '@/components/Timeline'
+import Section from '@/components/common/Section'
+import Timeline from '@/components/features/Timeline'
 import { HeroSection } from '@/components/about/HeroSection'
 import { SkillsSection } from '@/components/about/SkillsSection'
 import { PersonalStrengthsSection } from '@/components/about/PersonalStrengthsSection'

@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import Section from '@/components/Section'
+import Section from '@/components/common/Section'
 import { ContactForm } from '@/components/contact/ContactForm'
 import { ContactInfo } from '@/components/contact/ContactInfo'
 
