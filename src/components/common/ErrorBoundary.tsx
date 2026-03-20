@@ -1,5 +1,5 @@
 import React, { Component, ErrorInfo, ReactNode } from 'react'
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/ui/interactive/button'
 import { AlertTriangle } from 'lucide-react'
 
 interface Props {

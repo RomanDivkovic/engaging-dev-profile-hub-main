@@ -1,4 +1,4 @@
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/overlays/dialog'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -8,10 +8,10 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from '@/components/ui/alert-dialog'
-import { Button } from '@/components/ui/button'
+} from '@/components/ui/feedback/alert-dialog'
+import { Button } from '@/components/ui/interactive/button'
 import { Eye, Github, AlertTriangle } from 'lucide-react'
-import TechStack from './TechStack'
+import TechStack from '../common/TechStack'
 import { Project } from '@/data/projects'
 import { toast } from 'sonner'
 import { useState } from 'react'

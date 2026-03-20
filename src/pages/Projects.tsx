@@ -3,8 +3,8 @@ import Section from '@/components/common/Section'
 import ProjectCard from '@/components/features/ProjectCard'
 import ProjectDialog from '@/components/features/ProjectDialog'
 import { projects, Project } from '@/data/projects'
-import { Button } from '@/components/ui/button'
-import { Skeleton } from '@/components/ui/skeleton'
+import { Button } from '@/components/ui/interactive/button'
+import { Skeleton } from '@/components/ui/feedback/skeleton'
 
 const Projects = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
