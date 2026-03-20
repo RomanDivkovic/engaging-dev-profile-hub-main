@@ -1,5 +1,5 @@
 import Section from '@/components/common/Section'
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/ui/interactive/button'
 import { FileText } from 'lucide-react'
 
 export const CTASection = () => {

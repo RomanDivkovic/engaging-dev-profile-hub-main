@@ -1,8 +1,8 @@
 import { useOnlineStatus } from '@/hooks/use-online-status'
 import { useOfflineStorage } from '@/hooks/use-offline-storage'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/data-display/card'
+import { Badge } from '@/components/ui/data-display/badge'
+import { Button } from '@/components/ui/interactive/button'
 import { RefreshCw, MessageSquare, Briefcase } from 'lucide-react'
 
 export const OfflineContent = () => {

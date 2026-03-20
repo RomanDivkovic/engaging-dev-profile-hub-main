@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { ArrowDown, ChevronRight, Send } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/ui/interactive/button'
 import { MessageWall } from '@/components/features/MessageWall'
 import Section from '@/components/common/Section'
 import ProjectCard from '@/components/features/ProjectCard'

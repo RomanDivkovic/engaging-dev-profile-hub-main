@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/data-display/card'
+import { Button } from '@/components/ui/interactive/button'
 import { Eye, Github, AlertTriangle } from 'lucide-react'
-import TechStack from './TechStack'
+import TechStack from '../common/TechStack'
 import { cn } from '@/lib/utils'
 import { toast } from 'sonner'
 

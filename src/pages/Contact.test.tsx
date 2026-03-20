@@ -2,7 +2,7 @@ import React from 'react'
 import { render, screen, fireEvent } from '@testing-library/react'
 import Contact from './Contact'
 import '@testing-library/jest-dom'
-import { Toaster } from '@/components/ui/toaster'
+import { Toaster } from '@/components/ui/feedback/toaster'
 
 global.scrollTo = jest.fn()
 

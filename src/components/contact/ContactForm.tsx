@@ -1,6 +1,6 @@
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
+import { Button } from '@/components/ui/interactive/button'
+import { Input } from '@/components/ui/forms/input'
+import { Textarea } from '@/components/ui/forms/textarea'
 import {
   Form,
   FormControl,
@@ -8,7 +8,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form'
+} from '@/components/ui/forms/form'
 import { useContactForm } from '@/hooks/use-contact-form'
 
 export const ContactForm = () => {

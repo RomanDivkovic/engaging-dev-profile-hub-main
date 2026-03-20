@@ -10,7 +10,7 @@ import {
   serverTimestamp,
 } from 'firebase/firestore'
 import { Filter } from 'bad-words'
-import { Textarea } from '@/components/ui/textarea'
+import { Textarea } from '@/components/ui/forms/textarea'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useOnlineStatus } from '@/hooks/use-online-status'
 
