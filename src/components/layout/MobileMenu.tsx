@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import { cn } from '@/lib/utils'
 import { Home, User, Briefcase, Mail } from 'lucide-react'
-import { SocialLinks } from './SocialLinks'
+import { SocialLinks } from '../common/SocialLinks'
 
 interface MobileMenuProps {
   isOpen: boolean

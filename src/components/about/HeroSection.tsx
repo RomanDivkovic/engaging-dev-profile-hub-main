@@ -1,4 +1,4 @@
-import Section from '@/components/Section'
+import Section from '@/components/common/Section'
 import { profileImage } from '@/data/about'
 
 export const HeroSection = () => {

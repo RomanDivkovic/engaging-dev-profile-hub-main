@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Github, Linkedin, Mail, MapPin, Phone } from 'lucide-react'
 import { contactInfo } from '@/data/contact'
-import MapModal from '@/components/MapModal'
+import MapModal from '@/components/features/MapModal'
 
 export const ContactInfo = () => {
   const [mapOpen, setMapOpen] = React.useState(false)

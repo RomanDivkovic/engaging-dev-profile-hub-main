@@ -1,5 +1,5 @@
-import Section from '@/components/Section'
-import TechStack from '@/components/TechStack'
+import Section from '@/components/common/Section'
+import TechStack from '@/components/common/TechStack'
 import { skills } from '@/data/about'
 
 export const SkillsSection = () => {

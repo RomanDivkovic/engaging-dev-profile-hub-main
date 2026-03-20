@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
-import { ThemeToggle } from './ThemeToggle'
+import { ThemeToggle } from '../common/ThemeToggle'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { useScrollDetection } from '@/hooks/use-scroll-detection'
 import { NavLinkItem } from './NavLinkItem'
-import { SocialLinks } from './SocialLinks'
+import { SocialLinks } from '../common/SocialLinks'
 import { MobileMenu } from './MobileMenu'
 
 const NavBar = () => {
