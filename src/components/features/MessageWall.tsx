@@ -181,15 +181,19 @@ export function MessageWall() {
         </button>
       </form>
       {error && <div className="text-red-500 mb-2">{error}</div>}
-      <div className="h-16 flex items-center justify-center">
+      <div className="mt-12 min-h-[200px] flex items-center justify-center overflow-hidden">
         <AnimatePresence mode="wait">
           <motion.div
             key={messages[currentIdx]?.id}
-            initial={{ scale: 0.7, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 1.3, opacity: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-lg font-medium text-center"
+            initial={{ scale: 0.5, opacity: 0, rotateX: -180 }}
+            animate={{ scale: 1, opacity: 1, rotateX: 0 }}
+            exit={{ scale: 1.5, opacity: 0, rotateX: 180 }}
+            transition={{ duration: 0.8, ease: 'easeInOut' }}
+            className="text-3xl md:text-5xl lg:text-6xl font-bold text-center px-4 text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-primary"
+            style={{
+              perspective: '1000px',
+              transformStyle: 'preserve-3d',
+            }}
           >
             {messages.length > 0 ? messages[currentIdx]?.text : 'No messages yet.'}
           </motion.div>

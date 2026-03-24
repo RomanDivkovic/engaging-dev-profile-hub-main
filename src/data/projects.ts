@@ -6,6 +6,7 @@ export interface Project {
   technologies: string[]
   features?: string[]
   image: string
+  mobileImage?: string
   demoUrl?: string
   githubUrl?: string
   alert?: string
@@ -104,32 +105,33 @@ export const projects: Project[] = [
     demoUrl: 'https://www.capio.se/',
     featured: true,
   },
-  {
-    id: 'calender-system',
-    title: 'Booking Calendar System',
-    description:
-      '(First version) A comprehensive booking calendar application that allows users to schedule appointments, manage availability, and handle reservations with an intuitive interface under the same household (Was created for our household and to get it up and run quickly we just added that in the first release that everything went to the same db). To use in our shared washroom and avoid conflicts.',
-    role: 'I developed the entire application from scratch, implementing the calendar functionality, booking logic, and user interface using modern React patterns and responsive design.',
-    technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Vite', 'Firebase', 'Real time database'],
-    features: [
-      'Interactive calendar interface',
-      'Appointment scheduling and management',
-      'Availability tracking',
-      'Responsive design for all devices',
-      'Real-time booking updates',
-    ],
-    image: '/bookingsystem.png',
-    demoUrl: 'https://bookingsystems.vercel.app/',
-    githubUrl: 'https://github.com/RomanDivkovic/booking-calender',
-    upgradePrompt: {
-      title: 'Newer Version Available',
-      message:
-        'This project has been updated to V2 with improved features and user experience. Would you like to view the newer version instead?',
-      upgradeUrl: 'https://bookingsystems.vercel.app/',
-      upgradeLabel: 'View V2 (Recommended)',
-      stayLabel: 'Stay on V1',
-    },
-  },
+  // {
+  //   id: 'calender-system',
+  //   title: 'Booking Calendar System',
+  //   description:
+  //     '(First version) A comprehensive booking calendar application that allows users to schedule appointments, manage availability, and handle reservations with an intuitive interface under the same household (Was created for our household and to get it up and run quickly we just added that in the first release that everything went to the same db). To use in our shared washroom and avoid conflicts.',
+  //   role: 'I developed the entire application from scratch, implementing the calendar functionality, booking logic, and user interface using modern React patterns and responsive design.',
+  //   technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Vite', 'Firebase', 'Real time database'],
+  //   features: [
+  //     'Interactive calendar interface',
+  //     'Appointment scheduling and management',
+  //     'Availability tracking',
+  //     'Responsive design for all devices',
+  //     'Real-time booking updates',
+  //   ],
+  //   image: '/bookingsystem.png',
+  //   mobileImage: '/famcalymobile.png',
+  //   demoUrl: 'https://bookingsystems.vercel.app/',
+  //   githubUrl: 'https://github.com/RomanDivkovic/booking-calender',
+  //   upgradePrompt: {
+  //     title: 'Newer Version Available',
+  //     message:
+  //       'This project has been updated to V2 with improved features and user experience. Would you like to view the newer version instead?',
+  //     upgradeUrl: 'https://bookingsystems.vercel.app/',
+  //     upgradeLabel: 'View V2 (Recommended)',
+  //     stayLabel: 'Stay on V1',
+  //   },
+  // },
   {
     id: 'portfolio',
     title: 'Developer Portfolio',
@@ -165,6 +167,7 @@ export const projects: Project[] = [
     role: '',
     technologies: ['React Native', 'Expo', 'TypeScript', 'Supabase'],
     image: '/famcalymobile.png',
+    mobileImage: '/famcalymobile.png',
     demoUrl: 'https://github.com/RomanDivkovic/famcal-app',
   },
   {
