@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/data-display/card'
 import { Button } from '@/components/ui/interactive/button'
 import { Eye, Github, AlertTriangle } from 'lucide-react'
@@ -11,6 +11,7 @@ interface ProjectCardProps {
   description: string
   technologies: string[]
   image: string
+  mobileImage?: string
   demoUrl?: string
   githubUrl?: string
   alert?: string
@@ -24,6 +25,7 @@ const ProjectCard = ({
   description,
   technologies,
   image,
+  mobileImage,
   demoUrl,
   githubUrl,
   alert,
@@ -33,6 +35,20 @@ const ProjectCard = ({
 }: ProjectCardProps) => {
   const [imageError, setImageError] = useState(false)
   const [imageLoaded, setImageLoaded] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  const currentImage = isMobile && mobileImage ? mobileImage : image
 
   const handleImageError = () => {
     console.error(`Failed to load image for project: ${title}`)
@@ -66,7 +82,7 @@ const ProjectCard = ({
       <div className="aspect-video w-full overflow-hidden relative bg-muted/20">
         {!imageError ? (
           <img
-            src={image}
+            src={currentImage}
             alt={`Screenshot of ${title} - ${description.slice(0, 60)}${description.length > 60 ? '...' : ''}`}
             className={cn(
               'w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110 group-hover:brightness-105',

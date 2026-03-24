@@ -124,6 +124,7 @@ const Home = () => {
               description={project.description}
               technologies={project.technologies}
               image={project.image}
+              mobileImage={project.mobileImage}
               demoUrl={project.demoUrl}
               githubUrl={project.githubUrl}
               alert={project.alert}

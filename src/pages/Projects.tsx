@@ -94,6 +94,7 @@ const Projects = () => {
                   title={project.title}
                   description={project.description}
                   image={project.image}
+                  mobileImage={project.mobileImage}
                   technologies={project.technologies || []}
                   demoUrl={project.demoUrl}
                   githubUrl={project.githubUrl}
