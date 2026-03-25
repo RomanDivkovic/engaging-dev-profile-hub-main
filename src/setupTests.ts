@@ -1,5 +1,15 @@
 import '@testing-library/jest-dom'
 
+// Mock Vercel Analytics
+jest.mock('@vercel/analytics', () => ({
+  track: jest.fn(),
+  Analytics: () => null,
+}))
+
+jest.mock('@vercel/speed-insights/react', () => ({
+  SpeedInsights: () => null,
+}))
+
 // Polyfill for IntersectionObserver for all tests
 class MockIntersectionObserver {
   constructor() {}

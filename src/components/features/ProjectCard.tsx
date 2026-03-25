@@ -5,6 +5,7 @@ import { Eye, Github, AlertTriangle } from 'lucide-react'
 import TechStack from '../common/TechStack'
 import { cn } from '@/lib/utils'
 import { toast } from 'sonner'
+import { track } from '@vercel/analytics'
 
 interface ProjectCardProps {
   title: string
@@ -59,8 +60,13 @@ const ProjectCard = ({
     setImageLoaded(true)
   }
 
-  const handleInteraction = (e: React.MouseEvent, url?: string) => {
+  const handleInteraction = (e: React.MouseEvent, url?: string, type?: string) => {
     e.stopPropagation()
+
+    if (type && title) {
+      track('Project Interaction', { project: title, action: type })
+    }
+
     if (alert) {
       toast.info(alert, {
         action: url ? { label: 'Continue', onClick: () => window.open(url, '_blank') } : undefined,
@@ -70,6 +76,11 @@ const ProjectCard = ({
     }
   }
 
+  const handleCardClick = () => {
+    track('Project Card Clicked', { project: title })
+    if (onClick) onClick()
+  }
+
   return (
     <Card
       className={cn(
@@ -77,7 +88,7 @@ const ProjectCard = ({
         featured && 'border-secondary/50',
         className
       )}
-      onClick={onClick}
+      onClick={handleCardClick}
     >
       <div className="aspect-video w-full overflow-hidden relative bg-muted/20">
         {!imageError ? (
@@ -126,7 +137,7 @@ const ProjectCard = ({
             variant="outline"
             size="sm"
             className="flex-1"
-            onClick={(e) => handleInteraction(e, demoUrl)}
+            onClick={(e) => handleInteraction(e, demoUrl, 'demo')}
           >
             <Eye className="mr-1 h-4 w-4" />
             Demo
@@ -137,7 +148,7 @@ const ProjectCard = ({
             variant="outline"
             size="sm"
             className="flex-1"
-            onClick={(e) => handleInteraction(e, githubUrl)}
+            onClick={(e) => handleInteraction(e, githubUrl, 'github')}
           >
             <Github className="mr-1 h-4 w-4" />
             Code
@@ -148,7 +159,7 @@ const ProjectCard = ({
             variant="outline"
             size="sm"
             className="flex-1"
-            onClick={(e) => handleInteraction(e)}
+            onClick={(e) => handleInteraction(e, undefined, 'private-repo')}
           >
             <Github className="mr-1 h-4 w-4" />
             Code

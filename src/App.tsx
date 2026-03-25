@@ -3,6 +3,8 @@ import { Toaster as Sonner } from '@/components/ui/feedback/sonner'
 import { TooltipProvider } from '@/components/ui/overlays/tooltip'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { BrowserRouter } from 'react-router-dom'
+import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 import NavBar from './components/layout/NavBar'
 import Footer from './components/layout/Footer'
 import PageTransitionRoutes from './PageTransitionRoutes'
@@ -31,6 +33,8 @@ const App = () => {
 
         <Toaster />
         <Sonner />
+        <Analytics />
+        <SpeedInsights />
         <BrowserRouter>
           <OfflineIndicator />
           {isOnline && <NavBar />}
