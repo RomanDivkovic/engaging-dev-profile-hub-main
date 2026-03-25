@@ -5,6 +5,7 @@ import * as z from 'zod'
 import { toast } from '@/hooks/use-toast'
 import emailjs from '@emailjs/browser'
 import { SERVICE_ID, TEMPLATE_ID, PUBLIC_KEY } from '../emailjs.config'
+import { track } from '@vercel/analytics'
 
 // Define the form schema
 const formSchema = z.object({
@@ -52,6 +53,13 @@ export const useContactForm = () => {
         },
         PUBLIC_KEY
       )
+
+      // Track successful form submission
+      track('Contact Form Submitted', {
+        name: data.name,
+        messageLength: data.message.length,
+      })
+
       toast({
         title: 'Message sent successfully!',
         description: "Thank you for reaching out. I'll get back to you soon.",
@@ -66,6 +74,12 @@ export const useContactForm = () => {
       form.reset()
     } catch (error) {
       console.error(error)
+
+      // Track form submission error
+      track('Contact Form Error', {
+        error: error instanceof Error ? error.message : 'Unknown error',
+      })
+
       toast({
         title: 'Something went wrong!',
         description: 'Could not send your message. Please try again later.',

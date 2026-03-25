@@ -7,6 +7,7 @@ export default {
   transform: {
     '^.+\\.(ts|tsx)$': ['ts-jest', { tsconfig: 'tsconfig.json' }],
   },
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+  transformIgnorePatterns: ['node_modules/(?!(@vercel/analytics|@vercel/speed-insights)/)'],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node', 'mjs'],
   setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
 }

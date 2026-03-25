@@ -174,7 +174,7 @@ export const projects: Project[] = [
     id: 'calender-system-v2',
     title: 'Booking Calendar System',
     description:
-      'A redesigned calendar app with enhanced features, modern UI, and improved performance. Built for scalability and future growth.',
+      'A redesigned calendar app with enhanced features, modern UI, and improved performance. Built for scalability and future growth. Also done to compare a react calender to the Vue version that was built.',
     role: '',
     technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Vite', 'Supabase'],
     image: '/bookingsystemv2.png',

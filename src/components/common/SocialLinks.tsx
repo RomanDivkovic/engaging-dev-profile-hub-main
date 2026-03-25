@@ -1,5 +1,6 @@
 import { Github, Linkedin, FileText, Code } from 'lucide-react'
 import { toast } from 'sonner'
+import { track } from '@vercel/analytics'
 
 interface SocialLinksProps {
   className?: string
@@ -16,7 +17,12 @@ export const SocialLinks = ({ className, showCodeButton = true }: SocialLinksPro
     ]
     const randomMessage = messages[Math.floor(Math.random() * messages.length)]
 
+    track('Code Button Clicked', { location: 'social-links' })
     toast.success(randomMessage, { duration: 3000 })
+  }
+
+  const handleSocialClick = (platform: string) => {
+    track('Social Link Clicked', { platform, location: 'header' })
   }
 
   return (
@@ -26,6 +32,7 @@ export const SocialLinks = ({ className, showCodeButton = true }: SocialLinksPro
         target="_blank"
         rel="noopener noreferrer"
         aria-label="GitHub"
+        onClick={() => handleSocialClick('GitHub')}
       >
         <Github className="h-5 w-5 hover:text-secondary transition-colors" />
       </a>
@@ -34,10 +41,17 @@ export const SocialLinks = ({ className, showCodeButton = true }: SocialLinksPro
         target="_blank"
         rel="noopener noreferrer"
         aria-label="LinkedIn"
+        onClick={() => handleSocialClick('LinkedIn')}
       >
         <Linkedin className="h-5 w-5 hover:text-secondary transition-colors" />
       </a>
-      <a href="/files/cv.pdf" target="_blank" rel="noopener noreferrer" aria-label="CV">
+      <a
+        href="/files/cv.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="CV"
+        onClick={() => track('CV Downloaded', { location: 'header' })}
+      >
         <FileText className="h-5 w-5 hover:text-secondary transition-colors" />
       </a>
       {showCodeButton && (

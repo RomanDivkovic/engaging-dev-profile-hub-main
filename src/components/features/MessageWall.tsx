@@ -137,51 +137,55 @@ export function MessageWall() {
   }, [isOnline, pendingMessages])
 
   return (
-    <section className="max-w-xl mx-auto my-8 p-4 bg-card rounded shadow">
-      <h2 className="text-xl font-bold mb-2">💬 Leave a Message</h2>
-      {!isOnline && (
-        <div className="mb-3 p-2 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded text-yellow-800 dark:text-yellow-200 text-sm">
-          📴 You are offline - messages are saved locally and will be sent when you are back online.
-          {pendingMessages.length > 0 &&
-            ` (${pendingMessages.length} pending message${pendingMessages.length > 1 ? 's' : ''})`}
+    <>
+      <section className="max-w-xl mx-auto my-8 p-4 bg-card rounded shadow">
+        <h2 className="text-xl font-bold mb-2">💬 Leave a Message</h2>
+        {!isOnline && (
+          <div className="mb-3 p-2 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded text-yellow-800 dark:text-yellow-200 text-sm">
+            📴 You are offline - messages are saved locally and will be sent when you are back
+            online.
+            {pendingMessages.length > 0 &&
+              ` (${pendingMessages.length} pending message${pendingMessages.length > 1 ? 's' : ''})`}
+          </div>
+        )}
+        <div className="text-xs text-muted-foreground mb-2">
+          Notice: Abuse, hate, or inappropriate language is strictly prohibited. If misuse is
+          detected, technical information (such as browser and timestamp) may be saved and you will
+          be blocked from posting further messages.
         </div>
-      )}
-      <div className="text-xs text-muted-foreground mb-2">
-        Notice: Abuse, hate, or inappropriate language is strictly prohibited. If misuse is
-        detected, technical information (such as browser and timestamp) may be saved and you will be
-        blocked from posting further messages.
-      </div>
-      <div className="text-sm font-medium text-muted-foreground mb-4">
-        Here you can leave a message that will be saved and displayed for everyone. A new message is
-        shown every 10 seconds.
-        {!isOnline && ' (Offline mode - limited functionality)'}
-      </div>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-2 mb-4">
-        <Textarea
-          className="flex-1"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder={
-            banned
-              ? 'You are blocked from posting.'
-              : !isOnline
-                ? 'Offline - meddelanden sparas lokalt'
-                : 'Say something nice!'
-          }
-          disabled={banned || !isOnline}
-          maxLength={200}
-          rows={3}
-        />
-        <button
-          type="submit"
-          className="bg-primary text-white dark:text-black font-bold px-4 py-2 rounded disabled:opacity-50 w-full"
-          disabled={banned || !isOnline}
-        >
-          {isOnline ? 'Post' : 'Offline - Spara lokalt'}
-        </button>
-      </form>
-      {error && <div className="text-red-500 mb-2">{error}</div>}
-      <div className="mt-12 min-h-[200px] flex items-center justify-center overflow-hidden">
+        <div className="text-sm font-medium text-muted-foreground mb-4">
+          Here you can leave a message that will be saved and displayed for everyone. A new message
+          is shown every 10 seconds.
+          {!isOnline && ' (Offline mode - limited functionality)'}
+        </div>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-2">
+          <Textarea
+            className="flex-1"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder={
+              banned
+                ? 'You are blocked from posting.'
+                : !isOnline
+                  ? 'Offline - meddelanden sparas lokalt'
+                  : 'Say something nice!'
+            }
+            disabled={banned || !isOnline}
+            maxLength={200}
+            rows={3}
+          />
+          <button
+            type="submit"
+            className="bg-primary text-white dark:text-black font-bold px-4 py-2 rounded disabled:opacity-50 w-full"
+            disabled={banned || !isOnline}
+          >
+            {isOnline ? 'Post' : 'Offline - Spara lokalt'}
+          </button>
+        </form>
+        {error && <div className="text-red-500 mt-2">{error}</div>}
+      </section>
+
+      <div className="max-w-4xl mx-auto my-12 min-h-[250px] flex items-center justify-center overflow-hidden">
         <AnimatePresence mode="wait">
           <motion.div
             key={messages[currentIdx]?.id}
@@ -189,7 +193,7 @@ export function MessageWall() {
             animate={{ scale: 1, opacity: 1, rotateX: 0 }}
             exit={{ scale: 1.5, opacity: 0, rotateX: 180 }}
             transition={{ duration: 0.8, ease: 'easeInOut' }}
-            className="text-3xl md:text-5xl lg:text-6xl font-bold text-center px-4 text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-primary"
+            className="text-3xl md:text-5xl lg:text-6xl font-bold text-center px-4 text-foreground"
             style={{
               perspective: '1000px',
               transformStyle: 'preserve-3d',
@@ -199,6 +203,6 @@ export function MessageWall() {
           </motion.div>
         </AnimatePresence>
       </div>
-    </section>
+    </>
   )
 }

@@ -1,7 +1,18 @@
 import { Github, Linkedin, Mail, FileText } from 'lucide-react'
+import { track } from '@vercel/analytics'
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
+
+  const handleFooterClick = (type: string, platform?: string) => {
+    if (type === 'social') {
+      track('Social Link Clicked', { platform, location: 'footer' })
+    } else if (type === 'email') {
+      track('Email Clicked', { location: 'footer' })
+    } else if (type === 'cv') {
+      track('CV Downloaded', { location: 'footer' })
+    }
+  }
 
   return (
     <footer className="bg-muted/60 dark:bg-muted/20 py-12">
@@ -30,6 +41,7 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 className="text-foreground hover:text-secondary transition-colors"
                 aria-label="GitHub"
+                onClick={() => handleFooterClick('social', 'GitHub')}
               >
                 <Github className="h-5 w-5" />
               </a>
@@ -39,6 +51,7 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 className="text-foreground hover:text-secondary transition-colors"
                 aria-label="LinkedIn"
+                onClick={() => handleFooterClick('social', 'LinkedIn')}
               >
                 <Linkedin className="h-5 w-5" />
               </a>
@@ -46,6 +59,7 @@ const Footer = () => {
                 href="mailto:romandivkovic@outlook.com"
                 className="text-foreground hover:text-secondary transition-colors"
                 aria-label="Email"
+                onClick={() => handleFooterClick('email')}
               >
                 <Mail className="h-5 w-5" />
               </a>
@@ -55,6 +69,7 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 className="text-foreground hover:text-secondary transition-colors"
                 aria-label="CV"
+                onClick={() => handleFooterClick('cv')}
               >
                 <FileText className="h-5 w-5" />
               </a>
