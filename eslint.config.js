@@ -51,7 +51,7 @@ export default [
   },
   // Jest tests
   {
-    files: ['**/*.test.{ts,tsx,js,jsx}', 'src/**/__tests__/**'],
+    files: ['**/*.test.{ts,tsx,js,jsx}', 'src/**/__tests__/**', '**/setupTests.ts'],
     languageOptions: {
       globals: {
         ...globals.jest,
