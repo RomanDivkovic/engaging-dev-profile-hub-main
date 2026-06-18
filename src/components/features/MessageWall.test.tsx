@@ -28,9 +28,23 @@ jest.mock('bad-words', () => {
   }
 })
 
+const setNavigatorOnline = (isOnline: boolean) => {
+  Object.defineProperty(window.navigator, 'onLine', {
+    configurable: true,
+    value: isOnline,
+  })
+}
+
 describe('MessageWall', () => {
   beforeEach(() => {
+    jest.clearAllMocks()
     localStorage.clear()
+    setNavigatorOnline(true)
+    ;(firestore.addDoc as jest.Mock).mockResolvedValue({})
+  })
+
+  afterEach(() => {
+    jest.restoreAllMocks()
   })
 
   it('renders textarea and post button', () => {
@@ -72,5 +86,37 @@ describe('MessageWall', () => {
     })
     fireEvent.click(screen.getByRole('button', { name: /post/i }))
     await waitFor(() => expect(firestore.addDoc).toHaveBeenCalled())
+  })
+
+  it('keeps stored pending messages when mounting offline', async () => {
+    setNavigatorOnline(false)
+    localStorage.setItem('pending-messages', JSON.stringify(['Queued message']))
+    const setItemSpy = jest.spyOn(Storage.prototype, 'setItem')
+
+    render(<MessageWall />)
+
+    await waitFor(() =>
+      expect(setItemSpy).toHaveBeenCalledWith(
+        'pending-messages',
+        JSON.stringify(['Queued message'])
+      )
+    )
+    expect(setItemSpy).not.toHaveBeenCalledWith('pending-messages', JSON.stringify([]))
+    expect(localStorage.getItem('pending-messages')).toBe(JSON.stringify(['Queued message']))
+
+    setItemSpy.mockRestore()
+  })
+
+  it('does not continuously retry when pending message sync fails', async () => {
+    localStorage.setItem('pending-messages', JSON.stringify(['Queued message']))
+    ;(firestore.addDoc as jest.Mock).mockRejectedValue(new Error('permission denied'))
+
+    render(<MessageWall />)
+
+    await waitFor(() => expect(firestore.addDoc).toHaveBeenCalledTimes(1))
+    await new Promise((resolve) => setTimeout(resolve, 50))
+
+    expect(firestore.addDoc).toHaveBeenCalledTimes(1)
+    expect(localStorage.getItem('pending-messages')).toBe(JSON.stringify(['Queued message']))
   })
 })
