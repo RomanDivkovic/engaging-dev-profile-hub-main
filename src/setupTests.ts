@@ -7,6 +7,10 @@ jest.mock('@vercel/analytics', () => ({
   Analytics: () => null,
 }))
 
+jest.mock('@vercel/analytics/react', () => ({
+  Analytics: () => null,
+}))
+
 jest.mock('@vercel/speed-insights/react', () => ({
   SpeedInsights: () => null,
 }))
