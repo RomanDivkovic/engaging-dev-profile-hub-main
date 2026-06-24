@@ -40,7 +40,8 @@ const App = () => {
           {isOnline && <NavBar />}
           <main id="main-content">
             <ErrorBoundary>
-              {isOnline ? <PageTransitionRoutes /> : <OfflineContent />}
+              <PageTransitionRoutes />
+              {!isOnline && <OfflineContent />}
             </ErrorBoundary>
           </main>
           {isOnline && <Footer />}
