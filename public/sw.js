@@ -26,7 +26,13 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(STATIC_CACHE).then((cache) => {
       console.log('Service Worker: Caching static files')
-      return cache.addAll(STATIC_FILES)
+      return Promise.all(
+        STATIC_FILES.map((file) =>
+          cache.add(file).catch((error) => {
+            console.warn('Service Worker: Failed to cache static file:', file, error)
+          })
+        )
+      )
     })
   )
   self.skipWaiting()
