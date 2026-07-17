@@ -170,14 +170,14 @@ export function MessageWall() {
                   ? 'Offline - meddelanden sparas lokalt'
                   : 'Say something nice!'
             }
-            disabled={banned || !isOnline}
+            disabled={banned}
             maxLength={200}
             rows={3}
           />
           <button
             type="submit"
             className="bg-primary text-white dark:text-black font-bold px-4 py-2 rounded disabled:opacity-50 w-full"
-            disabled={banned || !isOnline}
+            disabled={banned}
           >
             {isOnline ? 'Post' : 'Offline - Spara lokalt'}
           </button>
