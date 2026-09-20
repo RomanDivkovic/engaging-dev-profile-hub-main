@@ -29,8 +29,17 @@ jest.mock('bad-words', () => {
 })
 
 describe('MessageWall', () => {
+  const setOnlineStatus = (isOnline: boolean) => {
+    Object.defineProperty(window.navigator, 'onLine', {
+      configurable: true,
+      value: isOnline,
+    })
+  }
+
   beforeEach(() => {
+    jest.clearAllMocks()
     localStorage.clear()
+    setOnlineStatus(true)
   })
 
   it('renders textarea and post button', () => {
@@ -85,5 +94,20 @@ describe('MessageWall', () => {
     })
     fireEvent.click(screen.getByRole('button', { name: /post/i }))
     await waitFor(() => expect(firestore.addDoc).toHaveBeenCalled())
+  })
+
+  it('saves messages locally when submitted offline', async () => {
+    setOnlineStatus(false)
+    render(<MessageWall />)
+
+    fireEvent.change(screen.getByPlaceholderText(/offline/i), {
+      target: { value: 'Saved for later' },
+    })
+    fireEvent.click(screen.getByRole('button', { name: /offline - spara lokalt/i }))
+
+    await waitFor(() =>
+      expect(localStorage.getItem('pending-messages')).toBe(JSON.stringify(['Saved for later']))
+    )
+    expect(firestore.addDoc).not.toHaveBeenCalled()
   })
 })
