@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import Contact from './Contact'
 import '@testing-library/jest-dom'
 import { Toaster } from '@/components/ui/feedback/toaster'
@@ -35,6 +35,10 @@ jest.mock('../emailjs.config', () => ({
 }))
 
 describe('Contact form', () => {
+  beforeEach(() => {
+    jest.clearAllMocks()
+  })
+
   it('renders the contact form', () => {
     render(
       <>
@@ -68,6 +72,34 @@ describe('Contact form', () => {
 
     // Use findByText now that Toaster is rendered
     expect(await screen.findByText(/message sent successfully/i)).toBeInTheDocument()
+  })
+
+  it('does not include contact form PII in analytics payloads', async () => {
+    const analytics = jest.requireMock('@vercel/analytics') as { track: jest.Mock }
+    const privateMessage = 'This is a private message.'
+
+    render(
+      <>
+        <Toaster />
+        <Contact />
+      </>
+    )
+    fireEvent.change(screen.getByPlaceholderText(/your name/i), {
+      target: { value: 'Test User' },
+    })
+    fireEvent.change(screen.getByPlaceholderText(/your.email@example.com/i), {
+      target: { value: 'test@example.com' },
+    })
+    fireEvent.change(screen.getByPlaceholderText(/your message here/i), {
+      target: { value: privateMessage },
+    })
+    fireEvent.click(screen.getByRole('button', { name: /send message/i }))
+
+    await waitFor(() =>
+      expect(analytics.track).toHaveBeenCalledWith('Contact Form Submitted', {
+        messageLength: privateMessage.length,
+      })
+    )
   })
 
   it('shows validation errors for empty fields', async () => {

@@ -55,7 +55,6 @@ export const useContactForm = () => {
 
       // Track successful form submission
       track('Contact Form Submitted', {
-        name: data.name,
         messageLength: data.message.length,
       })
 
