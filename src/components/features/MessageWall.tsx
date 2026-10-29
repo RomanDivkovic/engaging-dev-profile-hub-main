@@ -16,12 +16,45 @@ import { useOnlineStatus } from '@/hooks/use-online-status'
 
 const filter = new Filter()
 const BANNED_SESSION_KEY = 'banned_from_messages'
+const LOCAL_MESSAGES_KEY = 'wall-of-kindness-messages'
+const isDevelopment =
+  typeof window !== 'undefined' &&
+  window.location.hostname !== '' &&
+  ['localhost', '127.0.0.1', '::1'].includes(window.location.hostname) &&
+  (typeof process === 'undefined' || process.env.NODE_ENV !== 'test')
+const BLOCKED_MESSAGE_PATTERNS = [
+  /\bass(?:hole)?\b/i,
+  /\bfuck(?:er|face|ing)?\b/i,
+  /\bshit(?:ty|head)?\b/i,
+]
+
+const isMessageInappropriate = (text: string) => {
+  const normalizedText = text
+    .normalize('NFKC')
+    .toLowerCase()
+    .replace(/[4@]/g, 'a')
+    .replace(/[1!]/g, 'i')
+    .replace(/3/g, 'e')
+    .replace(/0/g, 'o')
+    .replace(/\s+/g, ' ')
+
+  return (
+    filter.isProfane(text) ||
+    BLOCKED_MESSAGE_PATTERNS.some((pattern) => pattern.test(normalizedText))
+  )
+}
+
 const PENDING_MESSAGES_KEY = 'pending-messages'
 
 const loadPendingMessages = () => {
   try {
     const saved = localStorage.getItem(PENDING_MESSAGES_KEY)
-    return saved ? (JSON.parse(saved) as string[]) : []
+    return saved
+      ? (JSON.parse(saved) as unknown[]).filter(
+          (message: unknown): message is string =>
+            typeof message === 'string' && !isMessageInappropriate(message)
+        )
+      : []
   } catch (error) {
     console.error('Failed to parse pending messages:', error)
     return []
@@ -35,6 +68,7 @@ export function MessageWall() {
   const [error, setError] = useState('')
   const [banned, setBanned] = useState(false)
   const [pendingMessages, setPendingMessages] = useState<string[]>(loadPendingMessages)
+  const [connectionError, setConnectionError] = useState('')
   const [currentIdx, setCurrentIdx] = useState(0)
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const isSyncingPendingRef = useRef(false)
@@ -47,12 +81,42 @@ export function MessageWall() {
 
   useEffect(() => {
     if (localStorage.getItem(BANNED_SESSION_KEY)) setBanned(true)
+    const savedMessages = localStorage.getItem(LOCAL_MESSAGES_KEY)
+    if (savedMessages) {
+      try {
+        setMessages(JSON.parse(savedMessages))
+      } catch (error) {
+        console.error('Failed to parse local messages:', error)
+      }
+    }
+    if (isDevelopment) return
+
     const q = query(collection(db, 'messages'), orderBy('createdAt', 'desc'), limit(10))
-    const unsub = onSnapshot(q, (snap) => {
-      setMessages(snap.docs.map((doc) => ({ id: doc.id, ...doc.data() }) as Message))
-    })
+    const unsub = onSnapshot(
+      q,
+      (snap) => {
+        setConnectionError('')
+        setMessages(
+          snap.docs
+            .map((doc) => ({ id: doc.id, ...doc.data() }) as Message)
+            .filter(
+              (message) => typeof message.text === 'string' && !isMessageInappropriate(message.text)
+            )
+        )
+      },
+      (error) => {
+        console.error('Failed to load messages:', error)
+        setConnectionError(
+          'Messages could not be loaded from the server. Check your Firebase configuration.'
+        )
+      }
+    )
     return () => unsub()
   }, [])
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_MESSAGES_KEY, JSON.stringify(messages))
+  }, [messages])
 
   useEffect(() => {
     if (messages.length < 2) return
@@ -68,7 +132,7 @@ export function MessageWall() {
     setError('')
     if (banned) return
     if (!input.trim()) return setError('Message cannot be empty')
-    if (filter.isProfane(input)) {
+    if (isMessageInappropriate(input)) {
       setError('Inappropriate language detected. You are blocked from posting.')
       setBanned(true)
       localStorage.setItem(BANNED_SESSION_KEY, '1')
@@ -76,32 +140,52 @@ export function MessageWall() {
     }
 
     const messageText = input.trim()
+    const showLocalMessage = () => {
+      setMessages((previous) =>
+        [
+          { id: `local-${Date.now()}`, text: messageText, createdAt: new Date() },
+          ...previous.filter((message) => message.text !== messageText),
+        ].slice(0, 10)
+      )
+    }
 
-    if (!isOnline) {
-      // Save message locally when offline
-      setPendingMessages((prev) => [...prev, messageText])
+    if (!isOnline || isDevelopment) {
+      if (!isDevelopment) setPendingMessages((prev) => [...prev, messageText])
+      showLocalMessage()
       setInput('')
-      setError('Message saved locally. It will be sent when you are back online.')
+      setError(
+        isDevelopment
+          ? 'Development message saved only in this browser.'
+          : 'Message saved locally. It will be sent when you are back online.'
+      )
       return
     }
 
     try {
-      await addDoc(collection(db, 'messages'), {
+      const document = await addDoc(collection(db, 'messages'), {
         text: messageText,
         createdAt: serverTimestamp(),
       })
+      setMessages((previous) =>
+        [
+          { id: document.id, text: messageText, createdAt: new Date() },
+          ...previous.filter((message) => message.text !== messageText),
+        ].slice(0, 10)
+      )
       setInput('')
     } catch (err) {
       // If sending fails, save locally as fallback
       console.error('Failed to send message:', err)
       setPendingMessages((prev) => [...prev, messageText])
+      showLocalMessage()
+      setInput('')
       setError('Failed to send message. Saved locally for later.')
     }
   }
 
   // Try to send pending messages when coming back online
   useEffect(() => {
-    if (isOnline && pendingMessages.length > 0 && !isSyncingPendingRef.current) {
+    if (!isDevelopment && isOnline && pendingMessages.length > 0 && !isSyncingPendingRef.current) {
       const messagesToSend = [...pendingMessages]
 
       const sendPendingMessages = async () => {
@@ -185,19 +269,20 @@ export function MessageWall() {
                   ? 'Offline - meddelanden sparas lokalt'
                   : 'Say something nice!'
             }
-            disabled={banned || !isOnline}
+            disabled={banned}
             maxLength={200}
             rows={3}
           />
           <button
             type="submit"
             className="bg-primary text-white dark:text-black font-bold px-4 py-2 rounded disabled:opacity-50 w-full"
-            disabled={banned || !isOnline}
+            disabled={banned}
           >
             {isOnline ? 'Post' : 'Offline - Spara lokalt'}
           </button>
         </form>
         {error && <div className="text-red-500 mt-2">{error}</div>}
+        {connectionError && <div className="text-red-500 mt-2">{connectionError}</div>}
       </section>
 
       <div className="max-w-4xl mx-auto my-12 min-h-[250px] flex items-center justify-center overflow-hidden">

@@ -71,6 +71,19 @@ describe('MessageWall', () => {
     expect(localStorage.getItem('banned_from_messages')).toBe('1')
   })
 
+  it.each(['fuckface', 'this is ass'])('blocks abusive message: %s', async (message) => {
+    render(<MessageWall />)
+    fireEvent.change(screen.getByPlaceholderText(/say something nice/i), {
+      target: { value: message },
+    })
+    fireEvent.click(screen.getByRole('button', { name: /post/i }))
+
+    expect(
+      await screen.findByText('Inappropriate language detected. You are blocked from posting.')
+    ).toBeInTheDocument()
+    expect(firestore.addDoc).not.toHaveBeenCalled()
+  })
+
   it('disables input and button if banned', () => {
     localStorage.setItem('banned_from_messages', '1')
     render(<MessageWall />)
@@ -118,5 +131,20 @@ describe('MessageWall', () => {
 
     expect(firestore.addDoc).toHaveBeenCalledTimes(1)
     expect(localStorage.getItem('pending-messages')).toBe(JSON.stringify(['Queued message']))
+  })
+
+  it('saves messages locally when submitted offline', async () => {
+    setNavigatorOnline(false)
+    render(<MessageWall />)
+
+    fireEvent.change(screen.getByPlaceholderText(/offline/i), {
+      target: { value: 'Saved for later' },
+    })
+    fireEvent.click(screen.getByRole('button', { name: /offline - spara lokalt/i }))
+
+    await waitFor(() =>
+      expect(localStorage.getItem('pending-messages')).toBe(JSON.stringify(['Saved for later']))
+    )
+    expect(firestore.addDoc).not.toHaveBeenCalled()
   })
 })
