@@ -44,38 +44,39 @@ const isMessageInappropriate = (text: string) => {
   )
 }
 
+const PENDING_MESSAGES_KEY = 'pending-messages'
+
+const loadPendingMessages = () => {
+  try {
+    const saved = localStorage.getItem(PENDING_MESSAGES_KEY)
+    return saved
+      ? (JSON.parse(saved) as unknown[]).filter(
+          (message: unknown): message is string =>
+            typeof message === 'string' && !isMessageInappropriate(message)
+        )
+      : []
+  } catch (error) {
+    console.error('Failed to parse pending messages:', error)
+    return []
+  }
+}
+
 export function MessageWall() {
   type Message = { id: string; text: string; createdAt: unknown }
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState('')
   const [error, setError] = useState('')
   const [banned, setBanned] = useState(false)
-  const [pendingMessages, setPendingMessages] = useState<string[]>([])
+  const [pendingMessages, setPendingMessages] = useState<string[]>(loadPendingMessages)
   const [connectionError, setConnectionError] = useState('')
   const [currentIdx, setCurrentIdx] = useState(0)
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  const isSyncingPendingRef = useRef(false)
   const { isOnline } = useOnlineStatus()
-
-  // Load pending messages from localStorage on mount
-  useEffect(() => {
-    const saved = localStorage.getItem('pending-messages')
-    if (saved) {
-      try {
-        setPendingMessages(
-          JSON.parse(saved).filter(
-            (message: unknown): message is string =>
-              typeof message === 'string' && !isMessageInappropriate(message)
-          )
-        )
-      } catch (error) {
-        console.error('Failed to parse pending messages:', error)
-      }
-    }
-  }, [])
 
   // Save pending messages to localStorage
   useEffect(() => {
-    localStorage.setItem('pending-messages', JSON.stringify(pendingMessages))
+    localStorage.setItem(PENDING_MESSAGES_KEY, JSON.stringify(pendingMessages))
   }, [pendingMessages])
 
   useEffect(() => {
@@ -184,39 +185,50 @@ export function MessageWall() {
 
   // Try to send pending messages when coming back online
   useEffect(() => {
-    if (!isDevelopment && isOnline && pendingMessages.length > 0) {
-      const sendPendingMessages = async () => {
-        const remainingMessages = [...pendingMessages]
+    if (!isDevelopment && isOnline && pendingMessages.length > 0 && !isSyncingPendingRef.current) {
+      const messagesToSend = [...pendingMessages]
 
-        for (const message of pendingMessages) {
-          if (isMessageInappropriate(message)) {
-            remainingMessages.shift()
-            continue
-          }
+      const sendPendingMessages = async () => {
+        isSyncingPendingRef.current = true
+        let sentCount = 0
+
+        for (const message of messagesToSend) {
           try {
             await addDoc(collection(db, 'messages'), {
               text: message,
               createdAt: serverTimestamp(),
             })
-            remainingMessages.shift() // Remove sent message
+            sentCount += 1
           } catch (error) {
             console.error('Failed to send pending message:', error)
             break // Stop trying if one fails
           }
         }
 
-        setPendingMessages(remainingMessages)
+        if (sentCount > 0) {
+          const sentMessages = messagesToSend.slice(0, sentCount)
 
-        if (remainingMessages.length < pendingMessages.length) {
-          import('sonner').then(({ toast }) => {
-            toast.success(
-              `Sent ${pendingMessages.length - remainingMessages.length} pending message(s)! 📤`,
-              {
-                duration: 3000,
+          setPendingMessages((currentMessages) => {
+            let sentIndex = 0
+
+            return currentMessages.filter((message) => {
+              if (sentIndex < sentMessages.length && message === sentMessages[sentIndex]) {
+                sentIndex += 1
+                return false
               }
-            )
+
+              return true
+            })
+          })
+
+          import('sonner').then(({ toast }) => {
+            toast.success(`Sent ${sentCount} pending message(s)! 📤`, {
+              duration: 3000,
+            })
           })
         }
+
+        isSyncingPendingRef.current = false
       }
 
       sendPendingMessages()
