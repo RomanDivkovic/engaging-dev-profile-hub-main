@@ -15,12 +15,14 @@ export const CTASection = () => {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Button asChild>
             <a
-              href="https://betbuddys.app"
+              href="https://buddy-bets-battle-main.vercel.app/"
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => handleCTAClick('BetBuddy', 'https://betbuddys.app')}
+              onClick={() =>
+                handleCTAClick('BetBuddys', 'https://buddy-bets-battle-main.vercel.app/')
+              }
             >
-              BetBuddy
+              BetBuddys
             </a>
           </Button>
           <Button asChild>

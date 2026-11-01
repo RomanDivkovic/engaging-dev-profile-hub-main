@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/data-display/card'
 import { Button } from '@/components/ui/interactive/button'
-import { Eye, Github, AlertTriangle } from 'lucide-react'
+import { Eye, AlertTriangle } from 'lucide-react'
+import ProjectSourceActions from './ProjectSourceActions'
 import TechStack from '../common/TechStack'
 import { cn } from '@/lib/utils'
 import { toast } from 'sonner'
@@ -15,6 +16,8 @@ interface ProjectCardProps {
   mobileImage?: string
   demoUrl?: string
   githubUrl?: string
+  privateSource?: boolean
+  backendUrl?: string
   alert?: string
   className?: string
   featured?: boolean
@@ -29,6 +32,8 @@ const ProjectCard = ({
   mobileImage,
   demoUrl,
   githubUrl,
+  privateSource,
+  backendUrl,
   alert,
   className,
   featured = false,
@@ -67,7 +72,7 @@ const ProjectCard = ({
       track('Project Interaction', { project: title, action: type })
     }
 
-    if (alert) {
+    if (alert && !privateSource) {
       toast.info(alert, {
         action: url ? { label: 'Continue', onClick: () => window.open(url, '_blank') } : undefined,
       })
@@ -131,7 +136,7 @@ const ProjectCard = ({
         <p className="text-muted-foreground mb-4 line-clamp-3">{description}</p>
         <TechStack technologies={technologies} />
       </CardContent>
-      <CardFooter className="flex justify-between gap-2">
+      <CardFooter className="flex flex-wrap justify-between gap-2">
         {demoUrl && (
           <Button
             variant="outline"
@@ -143,28 +148,13 @@ const ProjectCard = ({
             Demo
           </Button>
         )}
-        {githubUrl && (
-          <Button
-            variant="outline"
-            size="sm"
-            className="flex-1"
-            onClick={(e) => handleInteraction(e, githubUrl, 'github')}
-          >
-            <Github className="mr-1 h-4 w-4" />
-            Code
-          </Button>
-        )}
-        {!githubUrl && alert && (
-          <Button
-            variant="outline"
-            size="sm"
-            className="flex-1"
-            onClick={(e) => handleInteraction(e, undefined, 'private-repo')}
-          >
-            <Github className="mr-1 h-4 w-4" />
-            Code
-          </Button>
-        )}
+        <ProjectSourceActions
+          title={title}
+          githubUrl={githubUrl}
+          privateSource={privateSource}
+          backendUrl={backendUrl}
+          compact
+        />
       </CardFooter>
     </Card>
   )
