@@ -1,5 +1,5 @@
 import Section from '@/components/common/Section'
-import { profileImage } from '@/data/about'
+import { SpinningPortrait } from './SpinningPortrait'
 
 export const HeroSection = () => {
   return (
@@ -13,9 +13,7 @@ export const HeroSection = () => {
 
           {/* Profile Image and Bio */}
           <div className="flex flex-col md:flex-row items-center gap-8 mb-8">
-            <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden shadow-lg reveal-animation">
-              <img src={profileImage} alt="Roman Divković" className="w-full h-full object-cover" />
-            </div>
+            <SpinningPortrait />
 
             <div className="prose prose-lg dark:prose-invert max-w-none space-y-6 reveal-animation flex-1">
               <p className="text-lg text-muted-foreground">

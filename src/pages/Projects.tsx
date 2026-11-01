@@ -98,6 +98,8 @@ const Projects = () => {
                   technologies={project.technologies || []}
                   demoUrl={project.demoUrl}
                   githubUrl={project.githubUrl}
+                  privateSource={project.privateSource}
+                  backendUrl={project.backendUrl}
                   alert={project.alert}
                   featured={project.featured}
                   onClick={() => handleProjectClick(project)}

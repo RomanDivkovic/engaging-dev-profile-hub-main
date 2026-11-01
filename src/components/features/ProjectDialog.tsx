@@ -10,10 +10,10 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/feedback/alert-dialog'
 import { Button } from '@/components/ui/interactive/button'
-import { Eye, Github, AlertTriangle } from 'lucide-react'
+import { Eye, AlertTriangle } from 'lucide-react'
 import TechStack from '../common/TechStack'
 import { Project } from '@/data/projects'
-import { toast } from 'sonner'
+import ProjectSourceActions from './ProjectSourceActions'
 import { useState } from 'react'
 
 interface ProjectDialogProps {
@@ -34,11 +34,6 @@ const ProjectDialog = ({ project, isOpen, onClose }: ProjectDialogProps) => {
       // Show upgrade dialog for demo URL when upgrade prompt exists
       setPendingUrl(url)
       setShowUpgradeDialog(true)
-    } else if (project.alert && type === 'github') {
-      // Only block github if there's an alert
-      toast.info(project.alert, {
-        action: url ? { label: 'Continue', onClick: () => window.open(url, '_blank') } : undefined,
-      })
     } else if (url) {
       window.open(url, '_blank', 'noopener,noreferrer')
     }
@@ -119,26 +114,12 @@ const ProjectDialog = ({ project, isOpen, onClose }: ProjectDialogProps) => {
                   View Live Demo
                 </Button>
               )}
-              {project.githubUrl && (
-                <Button
-                  variant="outline"
-                  className="flex-1"
-                  onClick={(e) => handleInteraction(e, project.githubUrl, 'github')}
-                >
-                  <Github className="mr-2 h-4 w-4" />
-                  View Source Code
-                </Button>
-              )}
-              {!project.githubUrl && project.alert && (
-                <Button
-                  variant="outline"
-                  className="flex-1"
-                  onClick={(e) => handleInteraction(e, undefined, 'github')}
-                >
-                  <Github className="mr-2 h-4 w-4" />
-                  View Source Code
-                </Button>
-              )}
+              <ProjectSourceActions
+                title={project.title}
+                githubUrl={project.githubUrl}
+                privateSource={project.privateSource}
+                backendUrl={project.backendUrl}
+              />
             </div>
           </div>
         </DialogContent>

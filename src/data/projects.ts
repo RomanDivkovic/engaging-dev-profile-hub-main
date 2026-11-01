@@ -9,6 +9,8 @@ export interface Project {
   mobileImage?: string
   demoUrl?: string
   githubUrl?: string
+  privateSource?: boolean
+  backendUrl?: string
   alert?: string
   upgradePrompt?: {
     title: string
@@ -41,7 +43,7 @@ export const projects: Project[] = [
       'Auto-substitution based on fatigue and minute plans',
     ],
     image: '/basketball-manager.jpg',
-    githubUrl: 'https://github.com/RomanDivkovic/basketball-manager',
+    privateSource: true,
     alert: 'Console-based game currently playable. Web UI and Unity 3D versions in development.',
     featured: true,
   },
@@ -61,6 +63,9 @@ export const projects: Project[] = [
       'Firebase Functions',
       'TypeScript',
       'Vite',
+      'C#',
+      '.NET 8',
+      'Entity Framework Core',
     ],
     features: [
       'Group creation and management for betting leagues',
@@ -71,7 +76,9 @@ export const projects: Project[] = [
       'Mobile app with same functionality as web version',
     ],
     image: '/betbuddys.png',
-    demoUrl: 'https://betbuddys.app/',
+    demoUrl: 'https://buddy-bets-battle-main.vercel.app/',
+    privateSource: true,
+    backendUrl: 'https://github.com/RomanDivkovic/BetBuddysProject',
     alert:
       'The BetBuddys web repository is private. Mobile app code is also private repo (in development, not yet published to app stores).',
     featured: true,

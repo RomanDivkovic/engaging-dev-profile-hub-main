@@ -128,6 +128,8 @@ const Home = () => {
               mobileImage={project.mobileImage}
               demoUrl={project.demoUrl}
               githubUrl={project.githubUrl}
+              privateSource={project.privateSource}
+              backendUrl={project.backendUrl}
               alert={project.alert}
               featured={true}
             />
