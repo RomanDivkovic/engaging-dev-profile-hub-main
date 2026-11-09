@@ -15,7 +15,13 @@ export const SpinningPortrait = () => {
   const tilt = useMotionValue(0)
   const rotateY = useSpring(rotation, { stiffness: 180, damping: 26 })
   const rotateX = useSpring(tilt, { stiffness: 180, damping: 26 })
-  const drag = useRef<{ pointerId: number; x: number; rotation: number } | null>(null)
+  const drag = useRef<{
+    pointerId: number
+    x: number
+    y: number
+    rotation: number
+    tilt: number
+  } | null>(null)
   const [dragging, setDragging] = useState(false)
   const [angle, setAngle] = useState(0)
   useMotionValueEvent(rotation, 'change', (value) => {
@@ -42,8 +48,8 @@ export const SpinningPortrait = () => {
           aria-valuemin={0}
           aria-valuemax={360}
           aria-valuenow={angle}
-          aria-valuetext={`${angle} degrees; use left and right arrows to rotate, Home to reset`}
-          className="relative w-48 h-48 md:w-64 md:h-64 rounded-full cursor-grab active:cursor-grabbing touch-pan-y select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-4 focus-visible:ring-offset-background"
+          aria-valuetext={`${angle} degrees; use arrow keys to rotate, Home to reset`}
+          className="relative w-48 h-48 md:w-64 md:h-64 rounded-full cursor-grab active:cursor-grabbing touch-none select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-4 focus-visible:ring-offset-background"
           style={{
             rotateY: reducedMotion ? rotation : rotateY,
             rotateX: reducedMotion ? tilt : rotateX,
@@ -55,31 +61,30 @@ export const SpinningPortrait = () => {
             drag.current = {
               pointerId: event.pointerId,
               x: event.clientX,
+              y: event.clientY,
               rotation: rotation.get(),
+              tilt: tilt.get(),
             }
             setDragging(true)
           }}
           onPointerMove={(event) => {
             if (drag.current) {
               rotation.set(drag.current.rotation + (event.clientX - drag.current.x) * 1.2)
-            } else if (event.pointerType === 'mouse' && !reducedMotion) {
-              const bounds = event.currentTarget.getBoundingClientRect()
-              tilt.set(-((event.clientY - bounds.top) / bounds.height - 0.5) * 20)
+              tilt.set(drag.current.tilt - (event.clientY - drag.current.y) * 1.2)
             }
           }}
           onLostPointerCapture={() => {
             drag.current = null
             setDragging(false)
-            tilt.set(0)
           }}
           onPointerUp={(event) => event.currentTarget.releasePointerCapture(event.pointerId)}
-          onPointerLeave={() => {
-            if (!drag.current) tilt.set(0)
-          }}
           onKeyDown={(event) => {
             if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
               event.preventDefault()
               rotation.set(rotation.get() + (event.key === 'ArrowRight' ? 30 : -30))
+            } else if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+              event.preventDefault()
+              tilt.set(tilt.get() + (event.key === 'ArrowDown' ? 30 : -30))
             } else if (event.key === 'Home') {
               event.preventDefault()
               reset()
@@ -100,7 +105,18 @@ export const SpinningPortrait = () => {
             alt="Roman Divković"
             draggable={false}
             className="absolute inset-0 w-full h-full object-cover rounded-full border-4 border-background shadow-xl pointer-events-none"
-            style={{ transform: 'translateZ(15px)' }}
+            style={{ transform: 'translateZ(15px)', backfaceVisibility: 'hidden' }}
+          />
+          <img
+            src={profileImage}
+            alt=""
+            aria-hidden="true"
+            draggable={false}
+            className="absolute inset-0 w-full h-full object-cover rounded-full border-4 border-background shadow-xl pointer-events-none"
+            style={{
+              transform: 'rotateY(180deg) translateZ(15px)',
+              backfaceVisibility: 'hidden',
+            }}
           />
           <div
             aria-hidden="true"
@@ -110,7 +126,7 @@ export const SpinningPortrait = () => {
         </motion.div>
       </div>
       <p id="portrait-instructions" className="mt-5 text-xs text-muted-foreground">
-        {dragging ? 'Keep dragging to spin' : 'Drag to spin · arrow keys to rotate'}
+        {dragging ? 'Keep dragging to spin' : 'Drag or use arrow keys to rotate'}
       </p>
       <button
         type="button"

@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/data-d
 import { Badge } from '@/components/ui/data-display/badge'
 import { Button } from '@/components/ui/interactive/button'
 import { RefreshCw, MessageSquare, Briefcase } from 'lucide-react'
+import { projects } from '@/data/projects'
 
 export const OfflineContent = () => {
   const { isOnline } = useOnlineStatus()
@@ -11,23 +12,9 @@ export const OfflineContent = () => {
 
   if (isOnline) return null
 
-  // Cached project data (this would normally come from an API)
-  const cachedProjects = [
-    {
-      id: 'betbuddys',
-      title: 'BetBuddys',
-      description: 'A webapp for creating groups and betting with friends on UFC/PPV events.',
-      technologies: ['React', 'Firebase', 'Tailwind CSS'],
-      featured: true,
-    },
-    {
-      id: 'portfolio',
-      title: 'Developer Portfolio',
-      description: 'A personal portfolio website showcasing projects and skills.',
-      technologies: ['React', 'TypeScript', 'Tailwind CSS'],
-      featured: false,
-    },
-  ]
+  const cachedProjects = projects.filter((project) =>
+    ['basketball-manager', 'betbuddys', 'portfolio'].includes(project.id)
+  )
 
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-8">

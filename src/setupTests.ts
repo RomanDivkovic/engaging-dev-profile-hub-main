@@ -1,5 +1,8 @@
 /* eslint-env jest */
+import { TextDecoder, TextEncoder } from 'node:util'
 import '@testing-library/jest-dom'
+
+Object.assign(global, { TextDecoder, TextEncoder })
 
 // Mock Vercel Analytics
 jest.mock('@vercel/analytics', () => ({

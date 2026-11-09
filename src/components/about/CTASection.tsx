@@ -12,7 +12,19 @@ export const CTASection = () => {
     <Section className="bg-gradient-to-r from-navy/10 to-gold/10">
       <div className="text-center max-w-3xl mx-auto">
         <h2 className="text-3xl font-bold mb-6">Want to learn more?</h2>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <div className="flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-4">
+          <Button asChild>
+            <a
+              href="https://basketballmaneger.expo.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() =>
+                handleCTAClick('BasketballManager', 'https://basketballmaneger.expo.app')
+              }
+            >
+              BasketballManager
+            </a>
+          </Button>
           <Button asChild>
             <a
               href="https://buddy-bets-battle-main.vercel.app/"
@@ -27,12 +39,14 @@ export const CTASection = () => {
           </Button>
           <Button asChild>
             <a
-              href="https://bookingsystems.vercel.app"
+              href="https://travel-agency-nine-beta.vercel.app/"
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => handleCTAClick('Calender', 'https://bookingsystems.vercel.app')}
+              onClick={() =>
+                handleCTAClick('Travel Agency', 'https://travel-agency-nine-beta.vercel.app/')
+              }
             >
-              Calender
+              Travel Agency
             </a>
           </Button>
           <Button asChild>

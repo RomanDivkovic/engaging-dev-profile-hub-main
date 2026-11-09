@@ -52,6 +52,9 @@ describe('service worker install', () => {
 
     await expect(installPromise).resolves.toEqual(expect.any(Array))
     expect(add).toHaveBeenCalledWith('/favicon.ico')
+    expect(add).toHaveBeenCalledWith('/files/cv.pdf')
+    expect(add).toHaveBeenCalledWith('/basketball-manager.jpg')
+    expect(cachesMock.open).toHaveBeenCalledWith('roman-static-v2')
     expect(addAll).not.toHaveBeenCalled()
     expect(consoleMock.warn).toHaveBeenCalledWith(
       'Service Worker: Failed to cache static file:',
@@ -59,5 +62,33 @@ describe('service worker install', () => {
       expect.any(Error)
     )
     expect(selfMock.skipWaiting).toHaveBeenCalled()
+  })
+
+  it('removes old caches containing the previous CV when activated', async () => {
+    const cachesMock = {
+      keys: jest.fn(() =>
+        Promise.resolve([
+          'roman-static-v1',
+          'roman-dynamic-v1',
+          'roman-static-v2',
+          'roman-dynamic-v2',
+        ])
+      ),
+      delete: jest.fn(() => Promise.resolve(true)),
+    }
+    const { listeners } = loadServiceWorker(cachesMock)
+    let activationPromise: Promise<unknown> | undefined
+
+    listeners.activate[0]({
+      waitUntil: (promise: Promise<unknown>) => {
+        activationPromise = promise
+      },
+    })
+
+    await activationPromise
+    expect(cachesMock.delete).toHaveBeenCalledWith('roman-static-v1')
+    expect(cachesMock.delete).toHaveBeenCalledWith('roman-dynamic-v1')
+    expect(cachesMock.delete).not.toHaveBeenCalledWith('roman-static-v2')
+    expect(cachesMock.delete).not.toHaveBeenCalledWith('roman-dynamic-v2')
   })
 })

@@ -1,7 +1,7 @@
 // Service Worker for offline functionality
-const CACHE_NAME = 'roman-portfolio-v1'
-const STATIC_CACHE = 'roman-static-v1'
-const DYNAMIC_CACHE = 'roman-dynamic-v1'
+const CACHE_NAME = 'roman-portfolio-v2'
+const STATIC_CACHE = 'roman-static-v2'
+const DYNAMIC_CACHE = 'roman-dynamic-v2'
 
 // Files to cache immediately
 const STATIC_FILES = [
@@ -13,6 +13,7 @@ const STATIC_FILES = [
   '/robots.txt',
   // Images
   '/roman.png',
+  '/basketball-manager.jpg',
   '/betbuddys.png',
   '/bookingsystem.png',
   '/placeholder.svg',
