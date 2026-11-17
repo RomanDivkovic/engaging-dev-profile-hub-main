@@ -24,6 +24,13 @@ export const educationTimeline = [
 
 export const experienceTimeline = [
   {
+    year: 'Expo',
+    title: 'Startup App Development',
+    organization: 'Basketball Manager',
+    description:
+      'Helped a startup get up and running with its basketball management app, building the coaching-career experience using React Native, Expo and TypeScript, with on-device persistence through AsyncStorage.',
+  },
+  {
     year: '2022',
     title: 'Software Developer',
     organization: 'Capio AB',

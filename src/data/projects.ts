@@ -28,18 +28,67 @@ export const projects: Project[] = [
     title: 'Basketball Manager',
     description:
       'A basketball management game centred on starting a basketball coaching career. Built with Expo and TypeScript, with local, on-device persistence using AsyncStorage.',
-    role: 'I am developing the app across two projects using Expo and TypeScript, building the coaching-career experience and local persistence with AsyncStorage.',
+    role: 'I helped a startup get up and running with its basketball management app, using Expo and TypeScript to build the coaching-career experience and local persistence with AsyncStorage.',
     technologies: ['React Native', 'Expo', 'TypeScript', 'AsyncStorage'],
     features: [
       'Basketball coaching-career experience in development',
       'Local, on-device persistence with AsyncStorage',
     ],
     image: '/basketball-manager.jpg',
-    demoUrl: 'https://basketballmaneger.expo.app',
+    demoUrl: 'https://basketballmanager.se',
     privateSource: true,
     alert:
       'Currently in development. Uses AsyncStorage for local persistence; no SQL database currently.',
     featured: true,
+  },
+  {
+    id: 'basketball-manager-unity',
+    title: 'Basketball Manager — Unity',
+    description:
+      'A separate basketball management game built with Unity, C# and a native C++ engine, covering coaching careers, team management and match simulation.',
+    role: 'I develop the native game engine and its integration with the Unity client, connecting basketball simulation with the player experience.',
+    technologies: ['Unity', 'C#', 'C++'],
+    features: [
+      'Basketball match simulation',
+      'Team and roster management',
+      'Coaching-career progression',
+    ],
+    image: '/Basketball Playbook BM Icon.png',
+    privateSource: true,
+    alert: 'In development. Source code is private; no public demo is currently available.',
+  },
+  {
+    id: 'localis-ai',
+    title: 'LocalisAI',
+    description:
+      'A local-first AI assistant in development, bringing together local language models, opt-in personal memory and Swedish and English voice interaction.',
+    role: 'I develop the assistant, its local API and dashboard, with a focus on privacy, explicit memory controls and offline operation.',
+    technologies: ['AI', 'Python', 'FastAPI', 'React', 'TypeScript', 'Ollama', 'SQLite'],
+    features: [
+      'Local language-model inference',
+      'Opt-in personal memory',
+      'Swedish and English voice interaction',
+    ],
+    image: '/localis-ai.svg',
+    privateSource: true,
+    alert: 'In development. Source code is private; project details can be discussed on request.',
+  },
+  {
+    id: 'guardian-ai',
+    title: 'Guardian — AI Action Safeguards',
+    description:
+      'The action-safety project within LocalisAI, independently evaluating AI-proposed actions in a simulated smart home before they can run.',
+    role: 'I build the policy evaluation, owner-approval flow and audit records that make proposed AI actions inspectable.',
+    technologies: ['AI', 'Python', 'FastAPI', 'SQLite'],
+    features: [
+      'Independent action evaluation',
+      'Owner approval for sensitive actions',
+      'Simulated household devices and audit records',
+    ],
+    image: '/guardian-ai.svg',
+    privateSource: true,
+    alert:
+      'A LocalisAI component in development, tested with simulated devices. Source code is private.',
   },
   {
     id: 'betbuddys',

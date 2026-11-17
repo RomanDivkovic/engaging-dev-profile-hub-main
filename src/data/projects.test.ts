@@ -20,7 +20,7 @@ describe('projects data', () => {
   it('links to the Expo basketball app and describes its current stack', () => {
     const basketball = projects.find((project) => project.id === 'basketball-manager')
 
-    expect(basketball?.demoUrl).toBe('https://basketballmaneger.expo.app')
+    expect(basketball?.demoUrl).toBe('https://basketballmanager.se')
     expect(basketball?.technologies).toEqual(['React Native', 'Expo', 'TypeScript', 'AsyncStorage'])
   })
 

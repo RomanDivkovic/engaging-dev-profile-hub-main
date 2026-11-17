@@ -4,7 +4,8 @@ import {
   useMotionValue,
   useMotionValueEvent,
   useReducedMotion,
-  useSpring,
+  useTransform,
+  useAnimationFrame,
 } from 'framer-motion'
 import { RotateCcw } from 'lucide-react'
 import { profileImage } from '@/data/about'
@@ -13,8 +14,8 @@ export const SpinningPortrait = () => {
   const reducedMotion = useReducedMotion()
   const rotation = useMotionValue(0)
   const tilt = useMotionValue(0)
-  const rotateY = useSpring(rotation, { stiffness: 180, damping: 26 })
-  const rotateX = useSpring(tilt, { stiffness: 180, damping: 26 })
+  const backgroundPosition = useTransform(rotation, (value) => `${value / 1.8}% 50%`)
+  const portraitY = useTransform(tilt, (value) => Math.max(-20, Math.min(20, value)))
   const drag = useRef<{
     pointerId: number
     x: number
@@ -23,6 +24,12 @@ export const SpinningPortrait = () => {
     tilt: number
   } | null>(null)
   const [dragging, setDragging] = useState(false)
+  const [paused, setPaused] = useState(false)
+  useAnimationFrame((_, delta) => {
+    if (!reducedMotion && !paused && !drag.current) {
+      rotation.set(rotation.get() + Math.min(delta, 64) * 0.006)
+    }
+  })
   const [angle, setAngle] = useState(0)
   useMotionValueEvent(rotation, 'change', (value) => {
     setAngle(Math.round(((value % 360) + 360) % 360))
@@ -51,9 +58,8 @@ export const SpinningPortrait = () => {
           aria-valuetext={`${angle} degrees; use arrow keys to rotate, Home to reset`}
           className="relative w-48 h-48 md:w-64 md:h-64 rounded-full cursor-grab active:cursor-grabbing touch-none select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-4 focus-visible:ring-offset-background"
           style={{
-            rotateY: reducedMotion ? rotation : rotateY,
-            rotateX: reducedMotion ? tilt : rotateX,
-            transformStyle: 'preserve-3d',
+            overflow: 'hidden',
+            boxShadow: 'inset -28px -12px 40px rgba(0,0,0,0.65), 0 12px 32px rgba(0,0,0,0.25)',
           }}
           onPointerDown={(event) => {
             if (event.button !== 0) return
@@ -91,43 +97,43 @@ export const SpinningPortrait = () => {
             }
           }}
         >
-          <div className="absolute inset-0 rounded-full bg-gradient-to-br from-secondary to-navy shadow-2xl" />
-          {[1, 2, 3, 4].map((layer) => (
-            <div
-              key={layer}
-              aria-hidden="true"
-              className="absolute inset-0 rounded-full border-2 border-secondary/50 bg-background"
-              style={{ transform: `translateZ(${layer * 3}px)` }}
-            />
-          ))}
-          <img
-            src={profileImage}
-            alt="Roman Divković"
-            draggable={false}
-            className="absolute inset-0 w-full h-full object-cover rounded-full border-4 border-background shadow-xl pointer-events-none"
-            style={{ transform: 'translateZ(15px)', backfaceVisibility: 'hidden' }}
-          />
-          <img
-            src={profileImage}
-            alt=""
-            aria-hidden="true"
-            draggable={false}
-            className="absolute inset-0 w-full h-full object-cover rounded-full border-4 border-background shadow-xl pointer-events-none"
+          <motion.div
+            role="img"
+            aria-label="Roman Divković"
+            className="absolute inset-0 rounded-full pointer-events-none"
             style={{
-              transform: 'rotateY(180deg) translateZ(15px)',
-              backfaceVisibility: 'hidden',
+              backgroundImage: `url(${profileImage})`,
+              backgroundSize: '200% 100%',
+              backgroundRepeat: 'repeat-x',
+              backgroundPosition,
+              y: portraitY,
+              scale: 1.2,
             }}
           />
           <div
             aria-hidden="true"
-            className="absolute inset-0 rounded-full bg-gradient-to-br from-white/20 via-transparent to-black/10 pointer-events-none"
-            style={{ transform: 'translateZ(16px)' }}
+            className="absolute inset-0 rounded-full pointer-events-none"
+            style={{
+              background:
+                'radial-gradient(circle at 30% 28%, rgba(255,255,255,0.25), transparent 42%, rgba(0,0,0,0.65) 100%)',
+              boxShadow: 'inset -20px -8px 32px rgba(0,0,0,0.45)',
+            }}
           />
         </motion.div>
       </div>
       <p id="portrait-instructions" className="mt-5 text-xs text-muted-foreground">
-        {dragging ? 'Keep dragging to spin' : 'Drag or use arrow keys to rotate'}
+        {dragging ? 'Keep dragging to spin' : 'Drag or use arrow keys to rotate the globe'}
       </p>
+      {!reducedMotion && (
+        <button
+          type="button"
+          onClick={() => setPaused((value) => !value)}
+          aria-pressed={paused}
+          className="mt-2 mr-4 text-xs text-muted-foreground hover:text-foreground"
+        >
+          {paused ? 'Resume spin' : 'Pause spin'}
+        </button>
+      )}
       <button
         type="button"
         onClick={reset}
