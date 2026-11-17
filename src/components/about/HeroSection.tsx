@@ -30,9 +30,10 @@ export const HeroSection = () => {
               </p>
 
               <p className="text-lg text-muted-foreground">
-                Currently, I'm expanding my mobile development skills by learning Flutter and
-                developing an app using this framework. This allows me to explore new approaches to
-                cross-platform mobile development and stay current with emerging technologies.
+                I also build basketball management games with Expo and with Unity, C# and C++,
+                alongside private AI projects including LocalisAI and its Guardian action
+                safeguards. You can explore these projects in my portfolio and contact me to discuss
+                the work.
               </p>
 
               <p className="text-lg text-muted-foreground">
